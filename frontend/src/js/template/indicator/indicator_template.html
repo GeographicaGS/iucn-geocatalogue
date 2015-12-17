@@ -1,0 +1,137 @@
+<div class="main-content">
+	<div class="indicadores-header">
+		
+			<a href="indicators" jslink program><span class="goback-btn">Volver</span></a>
+			<h2 class="indicadores-title"><%=indicator.nombre%></h2>
+		
+			<ul class="tabs-header tabs-nav">
+				<li section="tab_tabla" class="active">Tabla</li>
+				<li section="tab_grafica">Gráfica</li>
+				<!-- <li>Nota</li> -->
+			</ul>
+	</div><!-- indicadores-header -->
+	
+	<div class="indicadores-body tabs-content">
+		
+		<div id="tab_tabla" class="tabs-item table-item">
+
+			<div class="wrapper">
+				<table class="table-cols-<%=columns%>">
+					<thead class="table-header static ">
+						<tr>
+							<%$.each(indicator.data[0], function(key, value){%>
+								<%if(key.indexOf('#0#') < 0){%>
+									<th><%=key.replace(/#.#/g,'')%></th>
+								<%}%>
+							<%});%>
+						</tr>
+					</thead>
+					
+					<tbody>
+						
+						<%_.each(indicator.data,function (data){ %>
+							<tr>
+								<%$.each(data, function(key, value){%>
+									<%if(key.indexOf('#0#') < 0){%>
+										<%if(Number(value) && value % 1 !== 0){%>
+											<td><%=App.formatNumber(value)%></td>
+										<%}else{%>
+											<td><%=value%></td>
+										<%}%>
+									<%}%>
+								<%});%>
+							</tr>
+						<%});%>
+						
+			
+					</tbody>
+				</table>
+
+				<!-- <table class="table-cols-2">
+						<thead class="table-header">
+							<tr>
+								<th>
+									<span class="application-search-btn">Municipio <span class="icon-search"></span> </span>
+									<div class="search-form-group">
+										<span class="ico-search"></span>
+										<input class="search-input" type="text" name="search" placeholder="Buscar municipio">
+										<span class="close-search-btn"></span>
+									</div>
+								</th>
+								<th><span>Valor</span></th>
+							</tr>
+						</thead>
+						
+						<tbody>
+							<tr>
+								
+								<td><span class="town">Arahal</span></td>
+								<td><span class="date"><strong>49,000</strong>€</span></td>	
+							</tr>
+							<tr>
+								
+								<td><span class="town">Arahal</span></td>
+								<td><span class="date"><strong>49,000</strong>€</span></td>	
+							</tr>
+							<tr>
+								
+								<td><span class="town">Arahal</span></td>
+								<td><span class="date"><strong>49,000</strong>€</span></td>	
+							</tr>
+						</tbody>
+				</table> -->
+				<!-- <table class="table-cols-3">
+					<thead class="table-header static ">
+						<tr>
+							<th>
+								Three columns table
+							</th>
+							<th>Heading</th>
+							<th><span>Valor</span></th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<td>Some Text</td>
+							<td><span><em>Italic</em></span></td>
+							<td><span><strong>Bold text</strong></span></td>	
+						</tr>
+						<tr>
+							<td>Some Text</td>
+							<td><span><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem soluta est velit inventore provident ab maxime cupiditate, modi ullam in voluptatibus. Porro unde tempora ex! Culpa, tempore consectetur autem mollitia!</em></span></td>
+							<td><span><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero quam praesentium, quibusdam illo exercitationem minima laudantium voluptate quaerat, magni pariatur deserunt cupiditate, ipsa doloremque in quas ducimus quia. Voluptas, tenetur!</strong></span></td>	
+						</tr>
+					</tbody>
+				</table> -->
+
+				<!-- <table class="table-cols-4">
+					<thead class="table-header static ">
+						<tr>
+							<th>Four columns table</th>
+							<th>Heading</th>
+							<th>Other Heading</th>
+							<th><span>Valor</span></th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<td>Special Text</span></td>
+							<td><span><em>Italic</em></span></td>
+							<td>Just a column</td>
+							<td><span><strong>Bold text</strong></span></td>	
+						</tr>
+			
+					</tbody>
+				</table> -->
+
+
+			</div><!-- wrapper -->
+		</div><!-- tab_tabla -->
+		<div id="tab_grafica" class="tabs-item"></div><!-- tab_grafica -->
+
+		<div id="tab_nota" class="tabs-item">
+			
+		</div><!-- tab_nota -->
+				
+	</div><!--indicadores-body tabs-content-->
+</div><!-- main-content -->

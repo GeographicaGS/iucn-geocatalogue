@@ -1,0 +1,6 @@
+[submodule "frontend/src/build/Sting"]
+	path = frontend/src/build/Sting
+	url = https://github.com/GeographicaGS/Sting.git
+[submodule "frontend/src/css/lib/Pepa"]
+	path = frontend/src/css/lib/Pepa
+	url = https://github.com/GeographicaGS/Pepa.git

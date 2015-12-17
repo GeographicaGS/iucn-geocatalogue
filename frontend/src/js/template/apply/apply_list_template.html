@@ -1,0 +1,62 @@
+<div class="main-content">
+	<div class="table-container">
+		<div class="wrapper">
+			<div class="inner">
+				<table class="application-table">
+					<thead class="table-header">
+						<tr>
+							<!-- <th> <span class="marker"></span> </th> -->
+							<th>
+								<span class="application-search-btn">Nº Solicitud / Denominación <span class="icon-search"></span> </span>
+								<div class="search-form-group">
+									<span class="ico-search"></span>
+									<input class="search-input" type="text" name="search" placeholder="Buscar">
+									<span class="close-search-btn"></span>
+								</div>
+							</th>
+							<th><span>Municipio</span></th>
+							<th><span>Medida</span></th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<%  _.each(applies,function (apply){ %>
+							<tr apply="<%=apply.id%>"  class=<%= apply.estado == 'Aprobado y finalizado' ? 'green': (apply.estado == 'Pendiente' ? 'blue' : 'grayed') %>>
+								<td title="<%=apply.denominacion%>">
+									<span class="number"><%=apply.solicitud%></span>
+									<span class="denomination"><%=apply.denominacion%></span>
+								</td>
+								<td><span class="town"><%=apply.town%></span></td>
+								<td title="<%=apply.medida%>"><span class="date"><%=apply.medida%></span></td>	
+							</tr>
+						<% }); %>
+						
+						<!-- <tr class="blue">
+							<td><span class="marker"></span></td>
+							<td><span class="number">061</span><span class="denomination">Comercialización Aceitunas La Prieta de Arahal</span></td>
+							<td><span class="town">Arahal</span></td>
+							<td><span class="date">2015/08/17 – 18:37</span></td>	
+						</tr>
+						<tr class="grayed">
+							<td><span class="marker"></span></td>
+							<td><span class="number">073</span><span class="denomination">Inversiones en Freiduría Chipi</span></td>
+							<td><span class="town">Arahal</span></td>
+							<td><span class="date">2015/08/17 – 18:26</span></td>	
+						</tr> -->
+					</tbody>
+				</table>
+				<!-- <div id="table-footer"class="table-footer fixedsticky">
+					<span class="load-more">Cargar mas</span> | 
+					<span class="counter">Todas (138)</span>
+				</div> -->
+			</div><!-- inner -->
+			
+		</div><!-- wrapper -->
+	</div><!-- table-container -->
+
+</div><!-- main-container -->
+
+
+
+
+

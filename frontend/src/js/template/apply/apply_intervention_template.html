@@ -1,0 +1,73 @@
+<div class="panel-header">
+	<h3 class="panel-toggle">Intervención</h3>
+	<%if(App.user.profile == "Administrador"){%>
+		<span class="edit-btn">Editar</span>
+		<span class="cancel-btn">Cancelar</span>
+		<span class="save-btn">Guardar</span>
+	<%}%>
+</div><!-- panel-header -->
+<div class="panel-body">
+	<form action="" class="application-form ">
+		<div class="form-group">
+			<span class="label">Subvención propuesta en el ITE</span>
+			<input name="subvencion_propuesta_ite" type="text" value="<%=App.formatNumber(apply.subvencion_propuesta_ite,2)%>" class="edit form-number"><span class="unit edit">%</span> 
+			<span class="form-number"><%=App.formatNumber(apply.subvencion_propuesta_ite,2)%></span><span class="unit">%</span> 
+		</div><!-- form-group -->
+
+		<div class="form-group">
+			<span class="label">Plus porcentual</span>
+			<input name="plus_porcentual" type="text" value="<%=App.formatNumber(apply.plus_porcentual,2)%>" class="edit form-number"><span class="unit edit">%</span>
+			<span class="form-number"><%=App.formatNumber(apply.plus_porcentual,2)%></span><span class="unit">%</span>
+		</div><!-- form-group -->
+		<div class="form-group">
+			<span class="label">Suplementaria</span>
+			<input type="radio" name="suplementaria" value="true" class="edit" <%=apply.suplementaria ? 'checked':''%> > 
+			<label class="edit">Si</label>
+			<input type="radio" name="suplementaria" value="false" class="edit" <%= !apply.suplementaria ? 'checked':''%> > 
+			<label class="edit">No</label>
+			<span><%=apply.suplementaria ? 'Si':'No'%></span>
+		</div><!-- form-group -->
+		<div class="form-group">
+			<span class="label">Tipo de intervención</span>
+			<select id="openingLicence" name="tipo_intervencion" class="edit">
+				<%_.each(apply.intervetions,function (int){ %>
+					<option <%=apply.tipo_intervencion==int.id ? 'selected':'' %> value="<%=int.id %>"><%=int.tipo_intervencion%></option>
+				<% }); %>
+			</select>
+			<span><%=apply.intervention_type_name%></span>
+		</div><!-- form-group -->
+		<div class="form-group">
+			<span class="label">Calificación</span>
+			<input <%=apply.calificacion_intervencion == 'Productivo' ? 'checked':''%> type="radio" name="calificacion_intervencion" value="Productivo" class="edit" >  
+			<label class="edit">Productiva</label>
+			<input <%=apply.calificacion_intervencion == 'No Productivo' ? 'checked':''%> type="radio" name="calificacion_intervencion" value="No Productivo" class="edit"> 
+			<label class="edit">No productiva</label>
+			<span><%=apply.calificacion_intervencion%></span>
+		</div><!-- form-group -->
+		<div class="form-group">
+			<span class="label">Grupo de Intervención</span>
+			<select name="gi" id="" class="edit">
+				<%_.each(apply.intervetionsGroups,function (ig){ %>
+					<option <%=apply.gi == ig.gi ? 'selected':''%> value="<%=ig.gi%>" description='<%=ig.nombre%>'>
+						<%=ig.gi + ' ' + ig.nombre%>
+					</option>
+				<% }); %>
+				<!-- <optgroup label="Lorem ipsum dolor sit amet">
+				    <option value="B123.1">B123.1</option>
+				    <option value="B121.1">B121.1</option>
+				     <option value="…">…</option>
+				 </optgroup>
+				 <optgroup label="Consectetur adipisicing elit">
+				    <option value="B227.1">B227.1</option>
+				    <option value="…">…</option>
+				 </optgroup> -->
+			</select>
+			<span><%=apply.gi + ' ' + apply.intervention_group_name%></span>
+		</div><!-- form-group -->
+		<div class="form-group form-block">
+			<span class="label">Observaciones</span>
+			<textarea name="descripcion_intervencion" id="" class="edit"><%=apply.descripcion_intervencion%></textarea>
+			<div class="no-edit"><%=apply.descripcion_intervencion%></div>
+		</div><!-- form-group -->
+	</form><!-- form -->
+</div><!-- panel-body -->

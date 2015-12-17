@@ -1,0 +1,17 @@
+<%  _.each(programs,function (program){ 
+		if(current == program.id){
+	%>
+			<h3><%= program.name %></h3>
+ <%  	}
+ }); %>
+
+<ul class="hide">
+	<%  _.each(programs,function (program){ 
+			if(current = program.id){
+				var title = program.name;
+			}
+			var prueba = program.name;
+		%>
+    	<li id="<%= program.id %>"><%= program.name %></li>
+    <%  }); %>
+</ul>

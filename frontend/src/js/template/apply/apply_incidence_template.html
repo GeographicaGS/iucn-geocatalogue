@@ -1,0 +1,24 @@
+<div class="panel-header">
+	<h3>Incidencias <span class="counter">(<%=incidences.length%>)</span></h3>
+</div><!-- panel-header -->
+<div class="panel-body">
+	<div class="application-form ">
+		<%  _.each(incidences,function (incidence){ %>
+		<div class="comment-block">
+			<span class="label" href="#">Por <strong><%=incidence.name + ' ' + incidence.surname %></strong></span>
+			<span class="form-number "><%=incidence.date%></span>
+			<%if(App.user.profile == "Administrador"){%>
+				<span incidence="<%=incidence.id%>" class="close-btn"></span>
+			<%}%>
+			<p><%=incidence.description%></p>	
+		</div>
+		<% }); %>
+		<%if(App.user.profile == "Administrador"){%>
+			<div class="form-group  form-block">
+				<!-- <textarea type="text" class="add-comment-text"></textarea> -->
+				<input type="text" class="add-comment-text" placeholder="Añadir comentario" >
+				<button class="add-comment-btn" type="button"><span>AÑADIR</span></button>	
+			</div>
+		<%}%>
+	</div>
+</div>

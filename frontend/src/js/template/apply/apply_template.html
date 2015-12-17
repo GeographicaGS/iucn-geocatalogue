@@ -1,0 +1,237 @@
+<div class="main-content">
+	<div class="application-container">
+		
+		<div class="application-header">
+			<a href="applies" jslink program>
+				<span class="goback-btn">Volver</span>
+			</a>
+			<!-- <span class="edit-btn">Modificar</span>  -->
+			<%if(App.user.profile == "Administrador"){%>
+				<div class="close-btn state <%= apply.estado == 'Aprobado y finalizado' ? 'green': (apply.estado == 'Pendiente' ? 'blue' : 'grayed') %>">
+					<span>Cambiar estado</span>
+					<ul class="close-options">					
+						<li class="executed-approve" state="Aprobado y finalizado">
+							Aprobado y finalizado
+						</li>
+						<li class="executed-false" state="Desestimación (denegación)">
+							Desestimación (denegación)
+						</li>
+						<li class="executed-false" state="Desistimiento (incumplimiento requerimiento)">
+							Desistimiento (incumplimiento requerimiento)
+						</li>
+						<li class="executed-false" state="Desistimiento (voluntario)">
+							Desistimiento (voluntario)
+						</li>
+						<li class="executed-false" state="Otros acuerdos">
+							Otros acuerdos
+						</li>
+						<li class="executed-true" state="Pendiente">
+							Pendiente
+						</li>
+						<li class="executed-false" state="Renuncia voluntaria">
+							Renuncia voluntaria
+						</li>
+						<li class="executed-false" state="Rescisión de Contrato">
+							Rescisión de Contrato
+						</li>
+						<li class="executed-false" state="Retirada solicitud de ayuda">
+							Retirada solicitud de ayuda
+						</li>
+					</ul>
+				</div>
+			<%}%>
+		</div><!-- application-header -->
+
+		<div class="application-content">
+			
+			<div class="application-basic-info">
+				<div class="application-reference">
+					<strong class="app-number <%= apply.estado == 'Aprobado y finalizado' ? 'green': (apply.estado == 'Pendiente' ? 'blue' : 'grayed') %>"><span class="marker <%= apply.estado == 'Aprobado y finalizado' ? 'green': (apply.estado == 'Pendiente' ? 'blue' : 'grayed') %>"></span>Solicitud nº <%=apply.solicitud%> <em>(<%=apply.estado%>)</em></strong>
+					Expte. <%=apply.expte%>
+				</div>
+				<!-- <span class="registration-date">Alta: BUSCAR</span> -->
+				<h2 class="application-title <%= apply.estado == 'Aprobado y finalizado' ? 'green': (apply.estado == 'Pendiente' ? 'blue' : 'grayed') %>"><%=apply.denominacion%></h2>
+				<span class="location-name"><%=apply.municipio%> <small class="location-code">[Cod. INE <%=apply.ine%>]</small></span>
+				<div class="amounts-compare-view">
+					<div>Inversión prevista <span id="plannedInvestment" class="amount-number"><%=App.formatNumber(apply.inversion_prevista,2)%> €</span></div>
+					<div>Subvención concedida <span id="subventionGrant" class="amount-number"><%=App.formatNumber(apply.subvencion_concedida,2)%> €</span></div>
+				</div><!-- amounts-comparator -->
+				<!-- <div class="btn-group">
+					<span class="deny-btn">Denegar</span>
+					<span class="grant-btn">Conceder</span>
+				</div> -->
+				<div class="application-status">
+					<!-- <em><%=apply.estado == 'Aprobado y finalizado' ? 'Concedido':'Rechazado' %></em> -->
+					<!-- <div class="last-updated">BUSCAR</div> -->
+					<div class="comment">
+						<%=apply.observaciones%>
+					</div>
+				</div>
+			</div><!-- application-basic-info -->
+
+			<div class="application-accordion">
+				<div class="accordion-group">
+					<div class="panel-item" id="basic_information">
+					</div><!-- panel-item -->
+
+					<!-- Documentación -->
+					<!-- <div class="panel-item ">
+						<div class="panel-header">
+							<h3 class="panel-toggle">Documentación</h3>
+							<span class="edit-btn">Editar</span>
+							<span class="cancel-btn">Cancelar</span>
+							<span class="save-btn">Guardar</span>
+						</div>
+						<div class="panel-body">
+							
+							<form action="" class="application-form ">
+								<div class="form-group">
+									<span class="label">Proyecto Técnico</span>
+									<select id="technicalPlan" name="" class="edit">
+										<option value="Sí">Visado</option>
+										<option value="No">No visado</option>
+										<option value="No procede">No procede</option>
+									</select>
+									<span>Visado</span>
+								</div>
+
+								<div class="form-group">
+									<span class="label">Licencia de Obra</span>
+									<select id="workLicence" name="" class="edit">
+										<option value="No procede">No procede</option>
+										<option value="No">No</option>	
+										<option value="Sí">Sí</option>
+										
+									</select>
+									<span>No procede</span>
+								</div>
+
+								<div class="form-group">
+									<span class="label">Licencia de Apertura</span>
+									<select id="openingLicence" name="" class="edit">
+										<option value="No procede">No procede</option>
+										<option value="No">No</option>	
+										<option value="Sí">Sí</option>
+										
+									</select>
+									<span>No procede</span>
+								</div>
+
+								<div class="form-group">
+									<span class="label">Contrato firmado</span>
+									<select id="contractSigned" name="" class="edit">
+										<option value="Sí">Sí</option>
+										<option value="No">No</option>
+										<option value="No procede">No procede</option>
+									</select>
+									<span>Sí</span>
+								</div>
+
+
+								<div class="form-group form-block">
+									<span class="label">Otros Permisos/Inscr.</span>
+									<textarea name="" id="" class="edit"></textarea>
+									<div></div>
+								</div>
+
+								<div class="form-group form-block">
+									<span class="label">Otras condiciones impuestas al Beneficiario</span>
+									<textarea name="" id="" class="edit"></textarea>
+									<div></div>
+								</div>
+
+							</form>
+						</div>
+					</div> -->
+
+					<div class="panel-item" id="intervention"><!-- Intervención -->
+					</div><!-- panel-item INtervención-->
+					
+					<!-- Importes -->
+					<div class="panel-item" id="import">
+					</div><!-- panel-item Importes -->
+					
+					<!-- Ejecución -->
+					<div class="panel-item" id="execution">
+					</div><!-- panel-item Ejecución-->
+					
+					<!-- ARCHIVOS -->
+					<!-- <div class="panel-item">
+						<div class="panel-header">
+							<h3 class="panel-toggle">Archivos <span class="counter">(3)</span></h3>
+						</div>
+						<div class="panel-body">
+							<form action="" class="application-form ">
+								<div class="form-group inline-edit">
+									<a class="label" href="#">proyectotecnico.pdf</a>
+									
+									<span class="form-number ">04/02/2015</span><span class="close-btn"></span>	
+								</div>
+								<div class="form-group inline-edit">
+									<a class="label" href="#">copiacontrato.pdf</a>
+									
+									<span class="form-number">04/05/2015</span><span class="close-btn"></span>	
+								</div>
+								<div class="form-group upload-file">
+									<div><span class="upload-btn">AÑADIR ARCHIVO</span></div>
+									<input type="file" name="" id=""  value="AÑADIR ARCHIVO">
+								</div>
+
+							</form>
+						</div>
+					</div> -->
+					
+					<!-- Incidencias -->
+					<div id="apply_incidences" class="panel-item-open">
+					</div>
+
+
+
+				</div><!-- accordion-group -->
+			</div><!-- application-accordion -->
+
+
+
+
+		</div><!-- application-content -->
+
+		
+	</div><!-- application-container -->
+
+	</div><!-- main-content -->
+	
+	<div id="close_module" class="lightbox">
+		<div class="module-panel">
+			<div class="module-header">
+				
+				<h3><span class="marker "></span>Cerrar solicitud No ejecutadA</h3>
+				<span class="cancel-btn">Cancelar</span>
+				<span class="save-btn">OK</span>
+			</div><!-- module-header -->
+			<div class="module-body">
+				<p><strong>029</strong><em>Asistencia técnica para la realización de un proyecto de investigación 
+				para el desarrollo de aceituna aliñada</em></p>
+				<form action="" class="application-form">
+					<div class="form-group">
+						<span class="label">Motivo</span>
+						<select name="" id="">
+							<option value="Renuncia voluntaria">
+				Renuncia voluntaria</option>
+				<option value="Option 2">Option 2</option>
+				<option value="Option 3">Option 3</option>
+				<option value="Option 4">Option 4</option>
+						</select>
+					</div><!-- form-group -->
+					<div class="form-group form-block">
+						<span class="label">Comentario</span>
+						<textarea name="" id="comment" >
+							
+						</textarea>
+						
+					</div><!-- fomr-group -->
+				</form>
+			</div><!-- module-body -->
+			
+		</div><!-- module-panel -->
+	</div><!-- close_module -->
+</div><!-- map-container -->

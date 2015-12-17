@@ -1,0 +1,17 @@
+<div class="main-content">
+	<div class="list-container indicadores">
+		<div class="list-header">
+			<div class="search-form-group">
+				<span class="ico-search"></span>
+				<input class="search-input" type="text" name="search" placeholder="Buscar in indicadores">
+			</div>
+		</div><!-- list-header -->
+		<div class="list-body">
+			<ul class="list-items">
+				<%  _.each(indicators,function (indicator){ %>
+					<li id="<%=indicator.id%>"><%=indicator.nombre%></li>
+				<% }); %>
+			</ul>
+		</div><!-- list-body -->		
+	</div><!-- list-container -->
+</div><!-- main-container -->

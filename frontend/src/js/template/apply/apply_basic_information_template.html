@@ -1,0 +1,165 @@
+<div class="panel-header">
+	<h3 class="panel-toggle">Información básica</h3>
+	<%if(App.user.profile == "Administrador"){%>
+		<span class="edit-btn">Editar</span>
+		<span class="cancel-btn">Cancelar</span>
+		<span class="save-btn">Guardar</span>
+	<%}%>
+</div><!-- panel-header -->
+<div class="panel-body">
+	<form action="" class="application-form ">
+		<div class="form-group">
+			<span class="label">Solicitante</span>
+			<input id="applicantName" type="text" name="solicitante" value="<%=apply.solicitante%>" class="edit" maxlength="50">
+			<span class="edit-mode"><%=apply.solicitante%></span>
+		</div><!-- form-group -->
+		<div class="form-group">
+			<span class="label">DNI/CIF</span>
+			<input disabled id="applicantId" class="edit"type="text" name="dni" value="<%=apply.dni%>">
+			<span><%=apply.dni%></span>
+		</div><!-- form-group -->
+		<div class="form-group">
+
+			<span class="label">Email</span>
+			<input id="applicantEmail" class="edit" type="text" name="email" maxlength="50" value="<%=apply.email%>">
+			<span><a href="mailto:<%=apply.email%>"><%=apply.email%></a></span>
+
+			<span class="label inline">Teléfono</span>
+			<input id="applicantPhone" class="edit inline" type="text" name="tlf" maxlength="50" value="<%=apply.tlf%>">
+			<span><%=apply.tlf%></span>
+
+		</div><!-- form-group -->
+
+		<div class="form-group">
+			<span class="label">Sector</span>
+			<select name="sector" class="edit" id="applicantSector">
+				<%_.each(apply.sectors,function (s){ %>
+					<option <%=apply.sector_actividad == s.id ? 'selected':''%> value="<%=s.id%>"><%=s.descripcion%></option>
+				<% }); %>
+				<!-- <option value="Público">BUSCAR</option>
+				<option value="Privado">BUSCAR</option> -->
+				<!-- <option value="Particulares">Particulares</option> -->
+			</select>
+			<!-- <input id="applicantSector" class="edit" type="text" value="Privado / Particulares / Mujer"> -->
+			<span><%=apply.sector%></span>
+		</div><!-- form-group -->
+
+		<div class="form-group">
+			<span class="label">Promueve</span>
+			<input name="promovido_por_mujer" type="checkbox" <%=apply.promovido_por_mujer ? 'checked':''%> name="promoter-type-mujer" class="edit" >  <label class="edit">Mujer</label>
+			<input name="promovido_por_joven" type="checkbox" <%=apply.promovido_por_joven ? 'checked':''%> name="promoter-type-joven" class="edit" > <label class="edit">Joven</label>
+			<span><%=apply.promovido_por_mujer ? 'Mujer ':''%><%=apply.promovido_por_joven ? 'Joven':''%></span>
+		</div><!-- form-group -->
+		<div class="form-group">
+			<span class="label">Categoría Incidencia</span>
+			<ul class="edit">
+				<li>
+					<input type="checkbox" <%=apply.g1_igualdad_h_m ? 'checked':''%> name="g1_igualdad_h_m">
+					<label>Sensibilización en Igualdad de Oportunidades entre H y M</label>					
+				</li>
+				<li>
+					<input type="checkbox" <%=apply.g2_formacion_igualdad_empleo ? 'checked':''%> name="g2_formacion_igualdad_empleo">
+					<label class="edit">Formación para la Igualdad en el Empleo</label>		
+				</li>
+				<li>
+					<input type="checkbox" <%=apply.g3_autoempleo_empleo_calidad_mujeres ? 'checked':''%> name="g3_autoempleo_empleo_calidad_mujeres"  class="edit">
+					<label>Autoempleo y empleo de calidad para mujeres</label>
+				</li>
+				<li>
+					<input type="checkbox" <%=apply.g4_conciliacion_laboral_familiar ? 'checked':''%> name="g4_conciliacion_laboral_familiar"  class="edit">
+					<label>Conciliación de la vida laboral, familiar y personal</label>
+				</li>
+				<li>
+					<input type="checkbox" <%=apply.g5_fomento_participacion_mujeres ? 'checked':''%> name="g5_fomento_participacion_mujeres"  class="edit">
+					<label>Fomento de la participación social de las mujeres</label>
+				</li>
+				<li>
+					<input type="checkbox" <%=apply.g6_conocimiento_mujeres ? 'checked':''%> name="g6_conocimiento_mujeres"  class="edit">
+					<label>Visibilización y ampliación del conocimiento de las mujeres</label>
+				</li>
+				<li>
+					<input type="checkbox" <%=apply.g7_ocio_enfoque_genero ? 'checked':''%> name="g7_ocio_enfoque_genero"  class="edit">
+					<label>Ocio y tiempo libre con enfoque de género</label>
+				</li>
+				<li>
+					<input type="checkbox" <%=apply.g8_otra_cat_incidencia ? 'checked':''%> name="g8_otra_cat_incidencia"  class="edit">
+					<label>Otra categoría de incidencia</label>
+				</li>
+				<li>
+					<input type="checkbox" <%=apply.j1_educacion_valores_juventud ? 'checked':''%> name="j1_educacion_valores_juventud"  class="edit">
+					<label>Educación en valores de la juventud rural</label>
+				</li>
+				<li>
+					<input type="checkbox" <%=apply.j2_formacion_juventud ? 'checked':''%> name="j2_formacion_juventud"  class="edit">
+					<label>Formación para la juventud rural</label>
+				</li>
+				<li>
+					<input type="checkbox" <%=apply.j3_autoempleo_empleo_calidad_juventud ? 'checked':''%> name="j3_autoempleo_empleo_calidad_juventud"  class="edit">
+					<label>Autoempleo y empleo de calidad para la juventud rural</label>
+				</li>
+				<li>
+					<input type="checkbox" <%=apply.j4_participacion_juventud ? 'checked':''%> name="j4_participacion_juventud"  class="edit">
+					<label>Dinamización y participación social de la juventud rural</label>
+				</li>
+				<li>
+					<input type="checkbox" <%=apply.j5_conocimiento_juventud ? 'checked':''%> name="j5_conocimiento_juventud"  class="edit">
+					<label>Visibilización y ampliación del conocimiento de la juventud</label>
+				</li>
+				<li>
+					<input type="checkbox" <%=apply.j6_ocio_juventud ? 'checked':''%> name="j6_ocio_juventud"  class="edit">
+					<label>Ocio y tiempo libre para la Juventud rural</label>
+				</li>
+				<li>
+					<input type="checkbox" <%=apply.j7_otra_cat_incidencia ? 'checked':''%> name="j7_otra_cat_incidencia">
+					<label>Otra categoría de incidencia</label>
+				</li>
+			</ul>
+			<!-- <select id="applicantIncident" name="" class="edit">
+				<option value="G6 Visibilización y ampliación del conocimiento de las mujeres">BUSCAR</option>
+				<option value="Categoria 2">BUSCAR</option>
+				<option value="Categoria 3">BUSCAR</option>
+			</select> -->
+			<!-- <input id="applicantIncident" class="edit" type="text" value="G6 Visibilización y ampliación del conocimiento de las mujeres "> -->
+			<span>
+				<%=apply.g1_igualdad_h_m ? 'Sensibilización en Igualdad de Oportunidades entre H y M <br>':''%>
+				<%=apply.g2_formacion_igualdad_empleo ? 'Formación para la Igualdad en el Empleo <br>':''%>
+				<%=apply.g3_autoempleo_empleo_calidad_mujeres ? 'Autoempleo y empleo de calidad para mujeres <br>':''%>
+				<%=apply.g4_conciliacion_laboral_familiar ? 'Conciliación de la vida laboral, familiar y personal <br>':''%>
+				<%=apply.g5_fomento_participacion_mujeres ? 'Fomento de la participación social de las mujeres <br>':''%>
+				<%=apply.g6_conocimiento_mujeres ? 'Visibilización y ampliación del conocimiento de las mujeres <br>':''%>
+				<%=apply.g7_ocio_enfoque_genero ? 'Ocio y tiempo libre con enfoque de género <br>':''%>
+				<%=apply.g8_otra_cat_incidencia ? 'Otra categoría de incidencia <br>':''%>
+				<%=apply.j1_educacion_valores_juventud ? 'Educación en valores de la juventud rural <br>':''%>
+				<%=apply.j2_formacion_juventud ? 'Formación para la juventud rural <br>':''%>
+				<%=apply.j3_autoempleo_empleo_calidad_juventud ? 'Autoempleo y empleo de calidad para la juventud rural <br>':''%>
+				<%=apply.j4_participacion_juventud ? 'Dinamización y participación social de la juventud rural <br>':''%>
+				<%=apply.j5_conocimiento_juventud ? 'Visibilización y ampliación del conocimiento de la juventud <br>':''%>
+				<%=apply.j6_ocio_juventud ? 'Ocio y tiempo libre para la Juventud rural <br>':''%>
+				<%=apply.j7_otra_cat_incidencia ? 'Otra categoría de incidencia <br>':''%>
+			</span>
+		</div><!-- form-group -->
+		<!-- <div class="form-group">
+			<span class="label">Actividad (negocio)</span>
+			<input id="applicantActivity" class="edit" type="text" value="Industria de la alimentación">
+			<span>BUSCAR</span>
+		</div> -->
+		<div class="form-group">
+			<span class="label">Localización</span>
+			<span class="edit corX">Coord. X 
+				<input name="coord_x" type="text" value="<%=apply.coord_x ? apply.coord_x:apply.coord_x_m%>"></span>
+			<span class="edit corY">Y 
+				<input name="coord_y" type="text" value="<%=apply.coord_y ? apply.coord_y:apply.coord_y_m%>"></span>
+			<span class="edit getfrommap-btn">Obtener del mapa</span>
+			<!-- <input id="applicantLocalization" class="edit" type="text" value="X 273835     Y 4126118"> -->
+			<span>X <%=apply.coord_x ? apply.coord_x:apply.coord_x_m%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Y <%=apply.coord_y ? apply.coord_y:apply.coord_y_m%></span>
+		</div><!-- form-group -->
+		<div class="form-group form-block">
+			<span class="label">Description</span>
+			<textarea name="descripcion" id="applicantDescription" class="edit" name="applicant-description"><%=apply.descripcion%></textarea>
+			<div class="form-desc"><%=apply.descripcion%></div>
+		</div><!-- form-group -->
+
+		
+	</form>
+	
+</div><!-- panel-body -->

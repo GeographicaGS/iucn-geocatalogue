@@ -1,0 +1,37 @@
+<div class="main-content">
+		<div class="table-container administracion">
+			<div class="wrapper">
+				<div class="inner">
+					<table class="table-cols-3">
+						<thead class="table-header">
+							<tr>
+								<th>
+									<!-- <span class="application-search-btn">
+										Nombre de usuario 
+										<span class="icon-search"></span> 
+									</span> -->
+									<div class="search-form-group show">
+										<span class="ico-search"></span>
+										<input class="search-input" type="text" name="search" placeholder="Buscar usuario"> 	
+									</div>
+								</th>
+								<!-- <th><span>Nombre</span></th> -->
+								<th><span>Correo electrónico</span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<%  _.each(users,function (user){ %>
+								<tr id="<%=user.id%>" user_name="<%=user.name + " " + user.surname%>">
+									<td><span><%=user.name + " " + user.surname%></span></td>
+									<td><span><a href="mailto:<%=user.email%>"><%=user.email%></a></span></td>	
+								</tr>
+							<%  }); %>
+						</tbody>
+					</table>
+
+				</div><!-- inner -->
+				
+			</div><!-- wrapper -->
+		</div><!-- table-container -->
+
+	</div><!-- main-container -->

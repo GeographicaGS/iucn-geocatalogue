@@ -1,0 +1,54 @@
+<div class="panel-header">
+	<h3 class="panel-toggle">Importes</h3>
+	<%if(App.user.profile == "Administrador"){%>
+		<span class="edit-btn">Editar</span>
+		<span class="cancel-btn">Cancelar</span>
+		<span class="save-btn">Guardar</span>
+	<%}%>
+</div><!-- panel-header -->
+<div class="panel-body">
+	<form action="" class="application-form ">
+		<div class="form-group highlighted">
+			<span class="label">Inversión prevista</span>
+			<input name="inversion_prevista" type="text" value="<%=App.formatNumber(apply.inversion_prevista,2)%>" class="edit form-number"><span class="unit edit">€</span> 
+			<span class="form-number"><%=App.formatNumber(apply.inversion_prevista,2)%></span><span class="unit">€</span>
+		</div><!-- highlighted -->
+
+		<div class="form-group ">
+				<span class="label">Presupuesto solicitado </span>
+				<input name="presupuesto_solicitud" type="text" value="<%=App.formatNumber(apply.presupuesto_solicitud,2)%>" class="edit form-number"><span class="unit edit">€</span> 
+				<span class="form-number"><%=App.formatNumber(apply.presupuesto_solicitud,2)%></span><span class="unit">€</span>
+		</div><!-- form-group -->
+		<div class="form-group ">
+				<span class="label">Inversión subvencionable </span>
+				<input name="inversion_subvencionable" type="text" value="<%=App.formatNumber(apply.inversion_subvencionable,2)%>" class="edit form-number"><span class="unit edit">€</span> 
+				<span class="form-number"><%=App.formatNumber(apply.inversion_subvencionable,2)%></span><span class="unit">€</span>
+		</div><!-- form-group -->
+		<div class="form-group ">
+				<span class="label">Subvención solicitada </span>
+				<input name="subvencion_solicitada" type="text" value="<%=App.formatNumber(apply.subvencion_solicitada,2)%>" class="edit form-number"><span class="unit edit">€</span> 
+				<span class="form-number"><%=App.formatNumber(apply.subvencion_solicitada,2)%></span><span class="unit">€</span>
+		</div><!-- form-group -->
+		<div class="form-group ">
+				<span class="label">Inversión en contrato  </span>
+				<input name="inversion_en_contrato" type="text" value="<%=App.formatNumber(apply.inversion_en_contrato,2)%>" class="edit form-number"><span class="unit edit">€</span> 
+				<span class="form-number"><%=App.formatNumber(apply.inversion_en_contrato,2)%></span><span class="unit">€</span>
+		</div><!-- form-group -->
+		<div class="form-group highlighted">
+				<span class="label">Subvención concedida  </span>
+				<input name="subvencion_concedida" type="text" value="<%=App.formatNumber(apply.subvencion_concedida,2)%>" class="edit form-number"><span class="unit edit">€</span> 
+				<span class="form-number"><%=App.formatNumber(apply.subvencion_concedida,2)%></span><span class="unit">€</span>
+		</div><!-- form-group -->
+		<div class="form-group ">
+				<span class="label">Subvención concedida condicionada  </span>
+				<input name="subvencion_concedida_condicionada" type="text" value="<%=App.formatNumber(apply.subvencion_concedida_condicionada,2)%>" class="edit form-number"><span class="unit edit">€</span> 
+				<span class="form-number"><%=App.formatNumber(apply.subvencion_concedida_condicionada,2)%></span><span class="unit">€</span>
+		</div><!-- form-group -->
+		<div class="form-group ">
+				<span class="label">Añadir a Grupo de Intervención </span>
+				<input name="anyadir_gi" type="text" value="<%=App.formatNumber(apply.anyadir_gi,2)%>" class="edit form-number"><span class="unit edit">€</span> 
+				<span class="form-number"><%=App.formatNumber(apply.anyadir_gi,2)%></span><span class="unit">€</span>
+		</div><!-- form-group -->
+
+		</form><!-- form -->
+</div><!-- panel-body -->

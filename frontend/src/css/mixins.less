@@ -1,0 +1,135 @@
+//Project's specific
+
+
+/*Icons*/
+
+.ico(@size) {
+    display: block;
+    .square(@size);
+    background: @sprite-img no-repeat 0 0;
+}
+.ico8 {
+    .ico(8px);
+}
+.ico26 { 
+    .ico(26px);
+}
+.ico-menu-plus {background-position: -4px -4px;}
+.ico-logout {background-position: -37px -4px;}
+.ico-back-to-page {background-position: -70px -4px;}
+.ico-close{background-position: -103px  -4px;}
+.ico-town {background-position: -136px -4px;}
+.ico-caret{background-position: -13px -46px;}
+.ico-angle-down-sm {background-position: -46px -46px;}
+.ico-angle-down{background-position: -74px -41px;}
+.ico-cloud-upload{background-position: -103px -37px;}
+.ico-edit{background-position: -136px -37px;}
+.ico-search {background-position: -4px -70px;}
+.ico-check {background-position: -37px -70px;}
+.ico-return{background-position: -70px -70px;}
+.ico-pin{background-position: -103px -70px;}
+.ico-plus-dark{background-position: -136px -70px;}
+
+//font-size: 62.5%; for this to work
+.font-size(@sizeValue) {
+    @remValue: @sizeValue;
+    @pxValue: (@sizeValue * 10);
+    font-size: ~"@{pxValue}px";
+    font-size: ~"@{remValue}rem";
+}
+
+//Bootstrap 
+.clearall{
+    &:after {
+        content:"";
+        display: table;
+        clear: both;
+    }
+}
+
+// Sizing shortcuts
+.size(@width;
+@height) {
+    width: @width;
+    height: @height;
+}
+
+.square(@size) {
+    .size(@size;
+    @size);
+}
+
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+// Text overflow
+// Requires inline-block or block for proper styling
+.text-overflow() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// CSS image replacement
+//
+// Heads up! v3 launched with only `.hide-text()`, but per our pattern for
+// mixins being reused as classes with the same name, this doesn't hold up. As
+// of v3.0.1 we have added `.text-hide()` and deprecated `.hide-text()`.
+//
+// Source: https://github.com/h5bp/html5-boilerplate/commit/aa0396eae757
+// Deprecated as of v3.0.1 (will be removed in v4)
+.hide-text() {
+    font: ~"0/0" a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
+
+// New mixin to use as of v3.0.1
+.text-hide() {
+    .hide-text();
+}
+
+.position(@position, @top, @right, @bottom, @left) {
+  position: @position;
+  top: @top;
+  right: @right;
+  bottom: @bottom;
+  left: @left;
+}
+
+
+//SOME STYLE OPTIONS
+
+/* single side shadows */
+
+.shadow-top(@size, @color) {
+    box-shadow: 0 -@size @size -@size @color;
+}
+
+.shadow-btm(@size, @color) {
+    box-shadow: 0 @size @size -@size @color;
+}
+
+.shadow-rgt(@size, @color) {
+    box-shadow: @size 0 @size -@size @color;
+}
+
+.shadow-lft(@size, @color) {
+    box-shadow: -@size 0 @size -@size @color;
+}
+
+.txt-stroke(@color) {
+    text-shadow: -1px -1px 0 @color, 1px -1px 0 @color, -1px 1px 0 @color, 1px 1px 0 @color;
+}
+

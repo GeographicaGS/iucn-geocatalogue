@@ -1,0 +1,44 @@
+<div class="panel-header">
+	<h3 class="panel-toggle">Ejecución</h3>
+	<%if(App.user.profile == "Administrador"){%>
+		<span class="edit-btn">Editar</span>
+		<span class="cancel-btn">Cancelar</span>
+		<span class="save-btn">Guardar</span>
+	<%}%>
+</div><!-- panel-header -->
+<div class="panel-body">
+	<form action="" class="application-form ">
+		<div class="form-group">
+			<span class="label">Fecha límite inicio</span>
+			<input name="fechalimite_inicio" type="text" class="edit" value="<%=apply.fechalimite_inicio%>">
+			<span><%=apply.fechalimite_inicio%></span>
+		</div><!-- form-group -->
+		<div class="form-group">
+			<span class="label">Fecha límite finalización</span>
+			<input name="fechalimite_finalizacion" type="text" class="edit" value="<%=apply.fechalimite_finalizacion%>">
+			<span><%=apply.fechalimite_finalizacion%></span>
+		</div><!-- form-group -->
+		<div class="form-group form-block">
+			<span class="label">Normas de competencia</span>
+			<textarea name="normas_competencia" id="" class="edit"><%=apply.normas_competencia%></textarea>
+			<div class="no-edit"><%=apply.normas_competencia%></div>
+		</div><!-- form-group -->
+		<!-- <div class="form-group heading">
+			<span class="label"><h5>Inversión final</h5></span>
+		</div> -->
+		<!-- <div class="form-group highlighted">
+			<span class="label">Inversión final realizada</span>
+			<input type="text" class="edit form-number" value="<%=apply.inversion_final_realizada%>"><span class="unit edit">€</span>
+			<span class="form-number"><%=apply.inversion_final_realizada%></span><span class="unit">€</span>
+		</div> -->
+		<!-- <div class="form-group highlighted">
+			<span class="label sub">Inversión final subvencionada</span>
+			<input type="text" class="edit form-number" value="<%=apply.inversion_final_subvencionable%>"><span class="unit edit">€</span>
+			<span class="form-number"><%=apply.inversion_final_subvencionable%></span><span class="unit class="form-number"">€</span>
+		</div> -->
+		<!-- <div class="form-group">
+			<textarea name="" id="" class="edit"><%=apply.descripcion_intervención%></textarea>
+			<div class="no-edit"><%=apply.descripcion_intervención%></div>
+		</div> -->
+	</form><!-- form -->
+</div><!-- panel-body -->
