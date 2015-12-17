@@ -16,11 +16,11 @@ deps.JS = [
 
     // Namespace
     'js/Namespace.js',
-    'js/Config.js',
+    'js/config.js',
     "js/md5.js",
     "js/Map.js",
-   
-    
+
+
     // --------------------
     // ------  Views ------
     // --------------------
@@ -35,24 +35,29 @@ deps.JS = [
     'js/View/ApplyImportView.js',
     'js/View/ApplyExecutionView.js',
     'js/View/ApplyIncidenceView.js',
+    'js/View/LayerListView.js',
+    'js/View/LayerView.js',
+    'js/View/LayerBasicInformationView.js',
     'js/View/IndicatorListView.js',
     'js/View/IndicatorView.js',
     'js/View/UserListView.js',
     'js/View/UserView.js',
     'js/View/ProgramView.js',
-    
+
 
     // --------------------
     // ------  Models ------
     // --------------------
     'js/model/ApplyModel.js',
     'js/model/ApplyIncidenceModel.js',
+    'js/model/LayerModel.js',
     'js/model/IndicatorModel.js',
     'js/model/UserModel.js',
 
     // --------------------
     // ------  Collections ------
     // --------------------
+    'js/collection/LayerCollection.js',
     'js/collection/ApplyCollection.js',
     'js/collection/ApplyGeomCollection.js',
     'js/collection/ApplyIncidenceCollection.js',
@@ -60,7 +65,7 @@ deps.JS = [
     'js/collection/UserCollection.js',
     'js/collection/ProgramCollection.js',
     'js/collection/TownGeomCollection.js',
-    
+
     // router
     'js/Router.js',
     // app

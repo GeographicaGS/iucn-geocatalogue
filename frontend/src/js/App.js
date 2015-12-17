@@ -5,7 +5,7 @@ var ENTER_KEY = 13;
 Backbone.View.prototype.close = function(){
   this.remove();
   this.unbind();
-  
+
   if (this.onClose){
     this.onClose();
   }
@@ -20,15 +20,15 @@ App.events = {};
 _.extend(App.events , Backbone.Events);
 
 App.events.on("menu", function(id){
-    if(Map.getMap()){
-        if(id==1){
-            Map.getMap().removeLayer(Map.featureIndicators);
-            Map.featureApplies.addTo(Map.getMap());
-        }else if(id==2){
-            Map.getMap().removeLayer(Map.featureApplies);
-            Map.featureIndicators.addTo(Map.getMap());
-        }
-    }
+    // if(Map.getMap()){
+    //     if(id==1){
+    //         Map.getMap().removeLayer(Map.featureIndicators);
+    //         Map.featureApplies.addTo(Map.getMap());
+    //     }else if(id==2){
+    //         Map.getMap().removeLayer(Map.featureApplies);
+    //         Map.featureIndicators.addTo(Map.getMap());
+    //     }
+    // }
 
     if(id==3){
         // $("#map").hide();
@@ -47,7 +47,7 @@ $(function() {
     $(document).ajaxError(function(event, jqxhr) {
         if (jqxhr.status == 404) {
             App.router.navigate('notfound',{trigger: true});
-        } 
+        }
         else {
             App.router.navigate('error',{trigger: true});
         }
@@ -63,7 +63,7 @@ $(function() {
             if (href=='#back') {
                 history.back();
             }
-            
+
             if($(this).attr("program") != undefined && $(this).attr("program") !='undefined'){
                 programUrl = 'program/' + App.programView.current + '/';
             }
@@ -72,36 +72,36 @@ $(function() {
         }
     });
 
-   
+
     App.ini();
-   
+
 
     $(document).resize(function(){
         App.resizeMe();
     });
-    
+
 });
 
 App.resizeMe = function(){
-    
+
 };
 
 App.detectCurrentLanguage = function(){
     // Detect lang analyzing the URL
-    if (document.URL.indexOf('/es/') != -1 || document.URL.endsWith('/es')) {        
+    if (document.URL.indexOf('/es/') != -1 || document.URL.endsWith('/es')) {
         return 'es';
     }
-    else if (document.URL.indexOf('/en/') != -1 || document.URL.endsWith('/en')) {        
+    else if (document.URL.indexOf('/en/') != -1 || document.URL.endsWith('/en')) {
         return 'en';
     }
-    
+
     return 'es';
 };
 
 App.ini = function(){
 
     this.lang = this.detectCurrentLanguage();
-    
+
     this.router = new App.Router({ });
 
     this.$main = $('main');
@@ -115,20 +115,20 @@ App.ini = function(){
     this.setAjaxSetup();
 
     App.isLogin();
-    
+
 };
 
 App.isLogin = function(){
 
     var user = localStorage.getItem("user");
-    
+
     if (user) {
         this.user = JSON.parse(user);
         // check user is really logged in
         App.doLogin(this.user)
 
     }else{
-        
+
         Backbone.history.start({pushState: true});
 
         if(window.location.pathname != '/login' && window.location.hash != '#login'){
@@ -139,14 +139,14 @@ App.isLogin = function(){
         // else{
         //     Backbone.history.start({pushState: true});
         // }
-        
+
     }
 };
 
 App.doLogin = function(user){
     this.user = user;
     $.ajax({
-        url: App.config.API_URL + "/is_logged", 
+        url: App.config.API_URL + "/is_logged",
         dataType:"JSON",
         success: function(usercomplete) {
             App.user = usercomplete;
@@ -160,8 +160,8 @@ App.doLogin = function(user){
                 $(".main-nav li[menu=3]").addClass('hide');
                 $('.main-nav li[menu=1] a[href="new_apply"]').addClass('hide');
             }
-            
-            
+
+
             if(window.location.pathname == '/login' || window.location.hash == '#login'){
                 if(!Backbone.History.started){
                     Backbone.history.start({pushState: true, silent: true});
@@ -233,15 +233,15 @@ App.showView = function(view) {
     if (this.currentView){
       this.currentView.close();
     }
- 
+
     this.currentView = view;
- 
-    this.$main.html(this.currentView.el);  
+
+    this.$main.html(this.currentView.el);
     this.scrollTop();
 }
 
 App.setProgram = function(id) {
-    
+
     //Incializo el programa
     if(!this.programView){
         this.programView = new App.View.Program({current:id});
@@ -249,27 +249,27 @@ App.setProgram = function(id) {
 
     }else{
         this.programView.setCurrent(id);
-    } 
+    }
 
     //Inicializo el mapa
-    if(!this.mapView && id){
-        this.mapView = new App.View.Map({'idProgram': this.programView.current});
-        this.programView.setMap(this.mapView);
-    }  
+    // if(!this.mapView && id){
+    //     this.mapView = new App.View.Map({'idProgram': this.programView.current});
+    //     this.programView.setMap(this.mapView);
+    // }
 }
 
 
 App.scrollTop = function(){
     var body = $('html, body');
-    body.animate({scrollTop:0}, '500', 'swing', function() { 
-       
+    body.animate({scrollTop:0}, '500', 'swing', function() {
+
     });
 }
 
 App.scrollToEl = function($el){
     $('html, body').animate({
         scrollTop: $el.offset().top
-    }, 500);    
+    }, 500);
 }
 
 App.nl2br = function nl2br(str, is_xhtml) {
@@ -287,7 +287,7 @@ App.slug = function(str) {
 }
 
 App.getBrowserInfo = function(){
-    var ua= navigator.userAgent, tem, 
+    var ua= navigator.userAgent, tem,
     M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
     if(/trident/i.test(M[1])){
         tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
@@ -324,24 +324,24 @@ App.formatNumber = function (n,decimals){
 
     if (typeof n == "number"){
         return parseFloat(sprintf("%."+ decimals + "f",n)).toLocaleString(this.lang, {
-            style: 'decimal', 
+            style: 'decimal',
             minimumFractionDigits: decimals
         });
     }
     else{
-        
+
         if (n.indexOf(".") != -1){
             n = sprintf("%."+ decimals + "f",n);
             return parseFloat(n).toFixed(decimals).toLocaleString(this.lang, {
-                style: 'decimal', 
+                style: 'decimal',
                 minimumFractionDigits: decimals
-            });   
+            });
         }
         else{
             return parseInt(n).toLocaleString(this.lang, {
-                style: 'decimal', 
-                minimumFractionDigits: decimals 
+                style: 'decimal',
+                minimumFractionDigits: decimals
             });
-        }    
+        }
     }
 };

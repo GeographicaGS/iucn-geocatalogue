@@ -1,0 +1,59 @@
+<div class="main-content">
+	<div class="application-container user-edit edit-on">
+
+		<div class="application-header">
+			<a href="applies" jslink program><span class="cancel-btn">Cancelar</span></a>
+			<span id="create-new-btn" class="save-btn">Crear</span>
+		</div><!-- application-header -->
+
+		<div class="application-body">
+			<div class="application-form user-form">
+				<div class="form-group">
+					<span class="label">Denominación</span>
+					<input name="denominacion" type="text"  class="edit">
+				</div>
+
+				<div class="form-group">
+					<span class="label">DNI/CIF</span>
+					<input name="solicitante" type="text"  class="edit" maxlength="12">
+				</div>
+
+				<div class="form-group">
+					<span class="label">Perfil</span>
+					<select name="municipio">
+						<%  _.each(layer.towns,function (town){ %>
+							<option value="<%=town.id %>"><%= town.descripcion %></option>
+						<%  }); %>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<span class="label">Grupo de intervención</span>
+					<select name="gi">
+						<%  _.each(layer.intervetionsGroups,function (group){ %>
+							<option value="<%=group.gi %>"><%= group.nombre %></option>
+						<%  }); %>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<span class="label">Localización</span>
+					<span class="edit corX show">Coord. X
+						<input name="coord_x" type="text" value="">
+					</span>
+					<span class="edit corY show">Y
+						<input name="coord_y" type="text" value="">
+					</span>
+					<span class="edit new-getfrommap-btn show">Obtener del mapa</span>
+				</div>
+
+				<div class="form-group form-block">
+					<span class="label">Observaciones</span>
+					<textarea name="observaciones" class="edit"></textarea>
+				</div>
+
+			</div>
+		</div>
+		</div>
+	</div>
+</div>

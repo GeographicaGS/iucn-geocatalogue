@@ -1,16 +1,16 @@
 'use strict';
 
-App.View.Apply = Backbone.View.extend({
+App.View.Layer = Backbone.View.extend({
 
-    _template : _.template( $('#apply-apply_template').html() ),
-    _new_apply_template : _.template( $('#apply-new_apply_template').html() ),
+    _template : _.template( $('#layer-layer_template').html() ),
+    _new_layer_template : _.template( $('#layer-new_layer_template').html() ),
 
     initialize: function(options) {
         App.events.trigger("menu", 1);
-        this.model = new App.Model.ApplyModel();
+        this.model = new App.Model.LayerModel();
 
-        if(options.applyId){
-            this.model.url = this.model.url + options.applyId
+        if(options.layerId){
+            this.model.url = this.model.url + options.layerId
             this.listenTo(this.model,"change:id",this.render);
 
         }else if(options.programId){
@@ -25,7 +25,7 @@ App.View.Apply = Backbone.View.extend({
         "click .panel-toggle" : "expandPanel",
         "click .edit-btn" : "activateEdit",
         'click .new-getfrommap-btn' : 'getMapLocation',
-        'click #create-new-btn' : 'createApply',
+        'click #create-new-btn' : 'createLayer',
         'click .state li' : 'changeState',
 
         // "click .cancel-btn" : "cancelEdit",
@@ -56,7 +56,7 @@ App.View.Apply = Backbone.View.extend({
         }
     },
 
-    createApply:function(){
+    createLayer:function(){
         var error = false;
 
         this.$('.error').removeClass('error');
@@ -67,7 +67,7 @@ App.View.Apply = Backbone.View.extend({
 
         if(!error){
             var id_program = this.model.get('id_program');
-            this.model = new App.Model.ApplyModel();
+            this.model = new App.Model.LayerModel();
 
             this.model.set({
                 denominacion: this.$('input[name="denominacion"]').val(),
@@ -80,12 +80,12 @@ App.View.Apply = Backbone.View.extend({
                 id_program: id_program
             });
 
-            this.model.url = App.config.API_URL + '/post_new_apply'
+            this.model.url = App.config.API_URL + '/post_new_layer'
 
             var _this = this;
             this.model.save('', '',
                 {success: function(model,response){
-                    App.router.navigate('program/' + App.programView.current + '/apply/' + response.results.id ,{trigger: true});
+                    App.router.navigate('program/' + App.programView.current + '/layer/' + response.results.id ,{trigger: true});
                     // App.mapView.resetAppliesGeoms()
                 }
             });
@@ -130,28 +130,20 @@ App.View.Apply = Backbone.View.extend({
     },
 
     render: function() {
-        this.basicInformationView = new App.View.ApplyBasicInformation({model: this.model, superView:this});
-        this.interventionView = new App.View.ApplyIntervention({model: this.model, superView:this });
-        this.importView = new App.View.ApplyImport({model: this.model, superView:this });
-        this.executionView = new App.View.ApplyExecution({model: this.model, superView:this });
-        this.incidenceView = new App.View.ApplyIncidence({id_apply: this.model.get('id')});
+        this.basicInformationView = new App.View.LayerBasicInformation({model: this.model, superView:this});
 
         this.$el.html(this._template({
-            apply : this.model.toJSON()
+            layer : this.model.toJSON()
         }));
 
         this.$('#basic_information').append(this.basicInformationView.el);
-        this.$('#intervention').append(this.interventionView.el);
-        this.$('#import').append(this.importView.el);
-        this.$('#execution').append(this.executionView.el);
-        this.$('#apply_incidences').append(this.incidenceView.el);
 
         return this;
     },
 
     renderNew: function(){
-        this.$el.html(this._new_apply_template({
-            apply : this.model.toJSON()
+        this.$el.html(this._new_layer_template({
+            layer : this.model.toJSON()
         }));
     },
 

@@ -1,0 +1,40 @@
+<div class="main-content">
+	<div class="table-container">
+		<div class="wrapper">
+			<div class="inner">
+				<table class="application-table">
+					<thead class="table-header">
+						<tr>
+							<!-- <th> <span class="marker"></span> </th> -->
+							<th>
+								<span class="application-search-btn">ID Code Num / Name <span class="icon-search"></span> </span>
+								<div class="search-form-group">
+									<span class="ico-search"></span>
+									<input class="search-input" type="text" name="search" placeholder="Buscar">
+									<span class="close-search-btn"></span>
+								</div>
+							</th>
+							<th><span>Department</span></th>
+							<th><span>Theme</span></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<%  _.each(layers,function (layer){ %>
+							<tr data-layer="<%=layer.id%>">
+								<td title="<%=layer.name%>">
+									<span class="number"><%=layer.id_code_num%></span>
+									<span class="denomination"><%=layer.name%></span>
+								</td>
+								<td><span class="town"><%=layer.department%></span></td>
+								<td title="<%=layer.theme%>"><span class="date"><%=layer.theme%></span></td>
+							</tr>
+						<% }); %>
+					</tbody>
+				</table>
+			</div><!-- inner -->
+
+		</div><!-- wrapper -->
+	</div><!-- table-container -->
+
+</div><!-- main-container -->

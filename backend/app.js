@@ -15,14 +15,15 @@ db.init(function(err){
     if (err){
         throw err;
     }
-    
+
     var path = require('path');
     var logger = require('morgan');
-    var bodyParser = require('body-parser'); 
-    
+    var bodyParser = require('body-parser');
+
     var routes = require('./routes/index');
     var index = require('./routes/index');
     var apply = require('./routes/apply');
+    var layer = require('./routes/layer');
     var indicator = require('./routes/indicator');
     var users = require('./routes/users');
     var program = require('./routes/program');
@@ -53,7 +54,7 @@ db.init(function(err){
         }
 
         app.use("/js",express.static(buildFolder));
-        app.use("/lib",express.static(path.join(__dirname, 'lib')));  
+        app.use("/lib",express.static(path.join(__dirname, 'lib')));
     }
 
     app.use(express.static(path.join(__dirname, 'public')));
@@ -61,6 +62,7 @@ db.init(function(err){
     app.use('/', routes);
     app.use('/', index);
     app.use('/', apply);
+    app.use('/', layer);
     app.use('/', indicator);
     app.use('/', users);
     app.use('/', program);

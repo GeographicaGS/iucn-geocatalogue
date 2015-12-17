@@ -1,8 +1,8 @@
 'use strict';
 
-App.View.ApplyBasicInformation = Backbone.View.extend({
+App.View.LayerBasicInformation = Backbone.View.extend({
 
-    _template : _.template( $('#apply-apply_basic_information_template').html() ),
+    _template : _.template( $('#layer-layer_basic_information_template').html() ),
 
     initialize: function(options) {
         this.model = options.model
@@ -64,7 +64,7 @@ App.View.ApplyBasicInformation = Backbone.View.extend({
         });
 
         var _this = this;
-        this.model.url = App.config.API_URL + "/post_apply_basic/" + this.model.get('id');
+        this.model.url = App.config.API_URL + "/post_layer_basic/" + this.model.get('id');
         this.model.save('', '',
             {success: function(){
                 _this.superView.closePanel($(e.currentTarget));
@@ -89,8 +89,9 @@ App.View.ApplyBasicInformation = Backbone.View.extend({
 
     render: function() {
         this.$el.html(this._template({
-            apply : this.model.toJSON()
+            layer : this.model.toJSON()
         }));
+        this.$('input.hasDatePicker').datepicker({dateFormat:'dd/mm/yy'});
         return this;
     },
 
