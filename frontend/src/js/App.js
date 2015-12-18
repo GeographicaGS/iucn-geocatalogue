@@ -64,9 +64,9 @@ $(function() {
                 history.back();
             }
 
-            if($(this).attr("program") != undefined && $(this).attr("program") !='undefined'){
-                programUrl = 'program/' + App.programView.current + '/';
-            }
+            // if($(this).attr("program") != undefined && $(this).attr("program") !='undefined'){
+            //     programUrl = 'program/' + App.programView.current + '/';
+            // }
 
             App.router.navigate(programUrl + $(this).attr('href'),{trigger: true});
         }
@@ -136,10 +136,6 @@ App.isLogin = function(){
             App.router.navigate('login',{trigger: true});
             App.resizeMe();
         }
-        // else{
-        //     Backbone.history.start({pushState: true});
-        // }
-
     }
 };
 
@@ -240,23 +236,23 @@ App.showView = function(view) {
     this.scrollTop();
 }
 
-App.setProgram = function(id) {
-
-    //Incializo el programa
-    if(!this.programView){
-        this.programView = new App.View.Program({current:id});
-        this.$programs.html(this.programView.el);
-
-    }else{
-        this.programView.setCurrent(id);
-    }
-
-    //Inicializo el mapa
-    // if(!this.mapView && id){
-    //     this.mapView = new App.View.Map({'idProgram': this.programView.current});
-    //     this.programView.setMap(this.mapView);
-    // }
-}
+// App.setProgram = function(id) {
+//
+//     //Incializo el programa
+//     if(!this.programView){
+//         this.programView = new App.View.Program({current:id});
+//         this.$programs.html(this.programView.el);
+//
+//     }else{
+//         this.programView.setCurrent(id);
+//     }
+//
+//     //Inicializo el mapa
+//     // if(!this.mapView && id){
+//     //     this.mapView = new App.View.Map({'idProgram': this.programView.current});
+//     //     this.programView.setMap(this.mapView);
+//     // }
+// }
 
 
 App.scrollTop = function(){
@@ -303,9 +299,13 @@ App.getBrowserInfo = function(){
 }
 
 App.checkInputByName = function(_this, name){
-    if(_this.$('input[name="' + name + '"]').val() == ""){
-        _this.$('input[name="' + name + '"]').addClass('error');
-        return true;
+    var $el = _this.$('input[name="' + name + '"]');
+    if($el.length == 0){
+      $el = _this.$('textarea[name="' + name + '"]');
+    }
+    if($el.length > 0 && $el.val() == ""){
+      $el.addClass('error');
+      return true;
     }
 
     return false;

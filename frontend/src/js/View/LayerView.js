@@ -12,19 +12,15 @@ App.View.Layer = Backbone.View.extend({
         if(options.layerId){
             this.model.url = this.model.url + options.layerId
             this.listenTo(this.model,"change:id",this.render);
-
+            this.model.fetch({"reset": true});
         }else if(options.programId){
-            this.model.url = this.model.url + 'program/' + options.programId
-            this.listenTo(this.model,"sync",this.renderNew);
+            this.renderNew();
         }
-
-        this.model.fetch({"reset": true})
     },
 
     events: {
         "click .panel-toggle" : "expandPanel",
         "click .edit-btn" : "activateEdit",
-        'click .new-getfrommap-btn' : 'getMapLocation',
         'click #create-new-btn' : 'createLayer',
         'click .state li' : 'changeState',
 
@@ -40,44 +36,61 @@ App.View.Layer = Backbone.View.extend({
         $(e.currentTarget).closest('.panel-item').addClass('edit-on');
     },
 
-    getMapLocation: function(e){
-        $(e.currentTarget).toggleClass('active');
-        $('#map').toggleClass('pointer');
-        var _this = this;
-        if($(e.currentTarget).hasClass('active')){
-            $(e.currentTarget).text('Cancelar');
-            Map.getMap().on('click', function(e) {
-                _this.$('.corX input').val(e.latlng.lng);
-                _this.$('.corY input').val(e.latlng.lat);
-                _this._cancelMapLocation();
-            });
-        }else{
-            this._cancelMapLocation();
-        }
-    },
-
     createLayer:function(){
         var error = false;
 
         this.$('.error').removeClass('error');
-        error = App.checkInputByName(this,"denominacion");
-        error += App.checkInputByName(this,"solicitante");
-        error += App.checkInputByName(this,"coord_x");
-        error += App.checkInputByName(this,"coord_y");
+        error = App.checkInputByName(this,"name");
+        error += App.checkInputByName(this,"department");
+        error += App.checkInputByName(this,"theme");
+        error += App.checkInputByName(this,"filetype");
+        error += App.checkInputByName(this,"crs");
+        error += App.checkInputByName(this,"extension");
+        error += App.checkInputByName(this,"review_date");
+        error += App.checkInputByName(this,"edition_date");
+        error += App.checkInputByName(this,"summary");
+        error += App.checkInputByName(this,"project_name");
+        error += App.checkInputByName(this,"source");
+        error += App.checkInputByName(this,"link");
+        error += App.checkInputByName(this,"data_responsible");
+        error += App.checkInputByName(this,"metadata_responsible");
+        error += App.checkInputByName(this,"language");
+        error += App.checkInputByName(this,"access_limitation");
 
         if(!error){
             var id_program = this.model.get('id_program');
             this.model = new App.Model.LayerModel();
 
+            var keywords = [];
+            $('input[name="keyword"]').each(function(){
+              keywords.append($(this).val());
+            })
+
             this.model.set({
-                denominacion: this.$('input[name="denominacion"]').val(),
-                solicitante: this.$('input[name="solicitante"]').val(),
-                municipio: this.$('select[name="municipio"]').val(),
-                gi: this.$('select[name="gi"]').val(),
-                coord_x: this.$('input[name="coord_x"]').val(),
-                coord_y: this.$('input[name="coord_y"]').val(),
-                observaciones: this.$('textarea[name="observaciones"]').val(),
-                id_program: id_program
+                id_code_num: this.$('input[name="id_code_num"]').val(),
+                name: this.$('input[name="name"]').val(),
+                department: this.$('input[name="department"]').val(),
+                theme: this.$('input[name="theme"]').val(),
+                subtheme: this.$('input[name="subtheme"]').val(),
+                family: this.$('input[name="family"]').val(),
+                summary: this.$('textarea[name="summary"]').val(),
+                filetype: this.$('input[name="filetype"]').val(),
+                crs: this.$('input[name="crs"]').val(),
+                extension: this.$('input[name="extension"]').val(),
+                bounding_box: this.$('input[name="bounding_box"]').val(),
+                scale: this.$('input[name="scale"]').val(),
+                review_date: this.$('input[name="review_date"]').val(),
+                edition_date: this.$('input[name="edition_date"]').val(),
+                project_name: this.$('input[name="project_name"]').val(),
+                source: this.$('input[name="source"]').val(),
+                publication: this.$('input[name="publication"]').val(),
+                link: this.$('input[name="link"]').val(),
+                data_responsible: this.$('input[name="data_responsible"]').val(),
+                metadata_responsible: this.$('input[name="metadata_responsible"]').val(),
+                language: this.$('input[name="language"]').val(),
+                access_limitation: this.$('textarea[name="access_limitation"]').val(),
+                other_info: this.$('input[name="other_info"]').val(),
+                keywords: keywords
             });
 
             this.model.url = App.config.API_URL + '/post_new_layer'
@@ -155,11 +168,4 @@ App.View.Layer = Backbone.View.extend({
         this.$('#plannedInvestment').text(App.formatNumber(inversion_prevista) + ' ' + '€');
         this.$('#subventionGrant').text(App.formatNumber(subvencion_concedida) + ' ' + '€');
     },
-
-    _cancelMapLocation: function(){
-        this.$('.new-getfrommap-btn').removeClass('active');
-        this.$('.new-getfrommap-btn').text('OBTENER DEL MAPA');
-        $('#map').removeClass('pointer');
-        Map.getMap().off('click');
-    }
 });

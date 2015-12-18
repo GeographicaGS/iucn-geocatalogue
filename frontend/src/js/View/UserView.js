@@ -1,13 +1,14 @@
 'use strict';
 
 App.View.User = Backbone.View.extend({
-    
+
     _template : _.template( $('#user-user_template').html() ),
     _template_new_user : _.template( $('#user-new_user_template').html() ),
-    
+
     initialize: function(options) {
+        var options = options || {};
         App.events.trigger("menu", 3);
-        
+
         this.model = new App.Model.UserModel();
         if(options.userId){
             this.model.url = this.model.url + options.userId
@@ -29,11 +30,11 @@ App.View.User = Backbone.View.extend({
     },
 
     editUser:function(){
-        this.$('.user-edit ').addClass('edit-on');  
+        this.$('.user-edit ').addClass('edit-on');
     },
 
     cancelEdit:function(){
-        this.$('.user-edit ').removeClass('edit-on');  
+        this.$('.user-edit ').removeClass('edit-on');
     },
 
     save:function(e){
@@ -56,28 +57,28 @@ App.View.User = Backbone.View.extend({
                 password: md5(this.$('input[name="password"]').val()),
                 id_profile: this.$('select[name="profile"]').val(),
                 profile: this.$('select[name="profile"] option:selected').text()
-            }); 
+            });
 
             if(!this.model.get("id")){
-                
+
                 this.model.url = App.config.API_URL + "/post_new_user";
-                this.model.save('', '', 
+                this.model.save('', '',
                     {success: function(){
-                        App.router.navigate('program/' + App.programView.current + '/admin', {trigger: true});
+                        App.router.navigate('admin', {trigger: true});
                     }
                 });
 
             }else{
 
                 this.model.url = App.config.API_URL + "/post_edit_user";
-                this.model.save('', '', 
+                this.model.save('', '',
                     {success: function(){
                         _this.render();
                     }
                 });
             }
         }
-        
+
     },
 
     delete:function(){
@@ -97,7 +98,7 @@ App.View.User = Backbone.View.extend({
         // Remove events on close
         this.stopListening();
     },
-    
+
     render: function() {
         this.$el.html(this._template({
             user: this.model.toJSON()

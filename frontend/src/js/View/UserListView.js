@@ -1,12 +1,12 @@
 'use strict';
 
 App.View.UserList = Backbone.View.extend({
-    
+
     _template : _.template( $('#user-user_list_template').html() ),
-    
+
     initialize: function() {
         App.events.trigger("menu", 3);
-        
+
         this.collection = new App.Collection.Users();
 
         this.listenTo(this.collection,"reset",this.render);
@@ -21,7 +21,7 @@ App.View.UserList = Backbone.View.extend({
 
     showUser:function(e){
         var id = $(e.currentTarget).attr('id');
-        App.router.navigate('program/' + App.programView.current + '/user/' + id ,{trigger: true});
+        App.router.navigate('admin/users/' + id ,{trigger: true});
     },
 
     searchUser:function(e){
@@ -42,7 +42,7 @@ App.View.UserList = Backbone.View.extend({
         // Remove events on close
         this.stopListening();
     },
-    
+
     render: function() {
         this.$el.html(this._template({
             users : this.collection.toJSON()

@@ -7,23 +7,15 @@ App.Router = Backbone.Router.extend({
     /* define the route and function maps for this router */
      routes: {
 
-        "" : "programDefault",
+        "" : "layerList",
 
-        "program/:id_program/applies" : "applyList",
-        "program/:id_program/apply/:id" : "apply",
-        "program/:id_program/new_apply" : "newApply",
-
-
-        "program/:id_program/indicators" : "indicatorList",
-        "program/:id_program/indicator/:id" : "indicator",
-
-        "program/:id_program/admin" : "userList",
-        "program/:id_program/user/:id" : "user",
-        "program/:id_program/new_user" : "user",
+        "admin" : "userList",
+        "admin/users/:id_user" : "user",
+        "admin/newuser" : "newUser",
 
         "layers": "layerList",
         "layers/:id_layer": "layer",
-        "layers/new": "newLayer",
+        "newlayer": "newLayer",
 
         "login" : "login",
 
@@ -32,61 +24,30 @@ App.Router = Backbone.Router.extend({
         "*other" : "notfound",
     },
 
-    programDefault: function(){
-        App.setProgram();
-    },
-
-    applyList: function(id_program){
-        App.setProgram(id_program);
-        App.showView(new App.View.ApplyList({'program':id_program}));
-    },
-
-    apply: function(id_program,id){
-        App.setProgram(id_program);
-        App.showView(new App.View.Apply({applyId: id}));
-    },
-
-    newApply: function(id_program){
-        App.setProgram(id_program);
-        App.showView(new App.View.Apply({programId: id_program}));
-    },
-
     layerList: function(){
         var id_program = 1;
-        App.setProgram(id_program);
         App.showView(new App.View.LayerList({'program':id_program}));
     },
 
     layer: function(id){
-        var id_program = 1;
-        App.setProgram(id_program);
         App.showView(new App.View.Layer({layerId: id}));
     },
 
     newLayer: function(){
         var id_program = 1;
-        App.setProgram(id_program);
         App.showView(new App.View.Layer({programId: id_program}));
     },
 
-    indicatorList:function(id_program){
-        App.setProgram(id_program);
-        App.showView(new App.View.IndicatorList({'program':id_program}));
-    },
-
-    indicator:function(id_program,id){
-        App.setProgram(id_program);
-        App.showView(new App.View.Indicator({indicatorId: id}));
-    },
-
-    userList:function(id_program){
-        App.setProgram(id_program);
+    userList:function(){
         App.showView(new App.View.UserList());
     },
 
-    user:function(id_program,id){
-        App.setProgram(id_program);
-        App.showView(new App.View.User({userId: id}));
+    user:function(id_user){
+        App.showView(new App.View.User({userId: id_user}));
+    },
+
+    newUser:function(){
+        App.showView(new App.View.User());
     },
 
     login: function(){

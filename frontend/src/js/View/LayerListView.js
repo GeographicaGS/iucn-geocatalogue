@@ -61,16 +61,16 @@ App.View.LayerList = Backbone.View.extend({
     showLayer:function(e){
         var id = $(e.currentTarget).data('layer');
         App.router.navigate('layers/' + id ,{trigger: true});
-        var model = this.collection.findWhere({id: parseInt(id)});
-        var x = model.get('coord_x');
-        var y = model.get('coord_y');
-        var mx = model.get('coord_x_m');
-        var my = model.get('coord_y_m');
-        if(!x || !y){
-            x = mx;
-            y = my;
-        }
-        Map.getMap().setView([y,x],18);
+        // var model = this.collection.findWhere({id: parseInt(id)});
+        // var x = model.get('coord_x');
+        // var y = model.get('coord_y');
+        // var mx = model.get('coord_x_m');
+        // var my = model.get('coord_y_m');
+        // if(!x || !y){
+        //     x = mx;
+        //     y = my;
+        // }
+        // Map.getMap().setView([y,x],18);
 
     },
 

@@ -18,6 +18,9 @@
 		<div class="form-group">
 			<span class="label edit">Department</span>
 			<input disabled id="layerDepartment" class="edit" type="text" name="department" maxlength="100" value="<%=layer.department%>">
+		</div>
+
+		<div class="form-group">
 			<span class="label inline edit">Theme</span>
 			<input id="layerTheme" class="edit inline" type="text" name="theme" maxlength="100" value="<%=layer.theme%>">
 		</div>
@@ -25,8 +28,6 @@
 		<div class="form-group">
 			<span class="label edit">Subtheme</span>
 			<input disabled id="layerSubtheme" class="edit" type="text" name="subtheme" maxlength="100" value="<%=layer.subtheme%>">
-			<span class="label inline edit">Family</span>
-			<input id="layerFamily" class="edit inline" type="text" name="family" maxlength="100" value="<%=layer.family%>">
 		</div>
 
 		<div class="form-group">
@@ -43,6 +44,12 @@
 				<li class="edit-mode"><%=value%></li>
 				<% }); %>
 			</div>
+		</div>
+
+		<div class="form-group">
+			<span class="label inline <% if(layer.family){ %>edit<% } %>">Family</span>
+			<input id="layerFamily" class="edit inline" type="text" name="family" maxlength="100" value="<%=layer.family%>">
+			<% if(layer.family){ %><span><%=layer.extension%></span><% } %>
 		</div><!-- form-group -->
 
 		<div class="form-group">
@@ -52,7 +59,7 @@
 		</div><!-- form-group -->
 
 		<div class="form-group">
-			<span class="label">CRS/SRS</span>
+			<span class="label">CRS (EPSG)</span>
 			<input disabled id="layerCrs" class="edit" type="text" name="crs" maxlength="50" value="<%=layer.crs%>">
 			<span><%=layer.crs%></span>
 			<span class="label inline">Extension</span>

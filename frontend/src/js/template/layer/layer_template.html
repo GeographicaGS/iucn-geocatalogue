@@ -2,7 +2,7 @@
 	<div class="application-container">
 
 		<div class="application-header">
-			<a href="applies" jslink program>
+			<a href="layers" jslink>
 				<span class="goback-btn">Back</span>
 			</a>
 			<!-- <span class="edit-btn">Modificar</span>  -->
@@ -17,14 +17,11 @@
 				</div>
 
 				<h2 class="application-title"><%=layer.name%></h2>
+				<div>Department <span id="plannedInvestment" class="amount-number"><%=layer.department%></span></div>
 				<div class="amounts-compare-view">
-					<div>Department <span id="plannedInvestment" class="amount-number"><%=layer.department%></span></div>
 					<div>Theme <span id="subventionGrant" class="amount-number"><%=layer.theme%></span></div>
-				</div>
-				<div class="amounts-compare-view">
 					<div>Subtheme <span id="subventionGrant" class="amount-number"><% if(layer.subtheme){ %><%=layer.subtheme%><% }else{ %>-<% } %></span></div>
-					<div>Family <span id="subventionGrant" class="amount-number"><% if(layer.family){ %><%=layer.family%><% }else{ %>-<% } %></span></div>
-				</div><!-- amounts-comparator -->
+				</div>
 
 				<div class="application-status">
 					<div class="comment">
