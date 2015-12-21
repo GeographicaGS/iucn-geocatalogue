@@ -45,17 +45,18 @@ LayerModel.prototype.insertLayer = function(layer,callback){
 };
 
 LayerModel.prototype.updateLayer = function(layer,callback){
+
 	BaseModel.query(function(err,insertId){
 		BaseModel.query(function(err,insertId){
 				for (keyword of layer.keywords) {
 					BaseModel.query(null,
 						'INSERT into data.layer_keyword(id_layer, keyword) VALUES ($1, $2)',
-						[insertId, keyword]
+						[layer.id, keyword]
 					);
 				}
 				callback(err,{id: insertId});
 			},
-			'DELETE FROM data.layer_keyword WHERE id_layer = $1', [insertId]
+			'DELETE FROM data.layer_keyword WHERE id_layer = $1', [layer.id]
 		);
 	},
 		'UPDATE data.layer SET id_code_num=$1, department=$2, theme=$3, subtheme=$4, family=$5, name=$6, filetype=$7, crs=$8, extension=$9, scale=$10, review_date=$11, edition_date=$12, summary=$13, project_name=$14, source=$15, publication=$16, link=$17, data_responsible=$18, metadata_responsible=$19, language=$20, access_limitation=$21, other_info=$22 WHERE id=$23 RETURNING id',
@@ -63,4 +64,18 @@ LayerModel.prototype.updateLayer = function(layer,callback){
 	);
 };
 
+LayerModel.prototype.deleteLayer = function(id_layer,callback){
+
+	BaseModel.query(function(err,insertId){
+		BaseModel.query(function(err,insertId){
+				
+				callback(err,null);
+			},
+			'DELETE FROM data.layer_keyword WHERE id_layer = $1', [id_layer]
+		);
+	},
+		'DELETE FROM data.layer WHERE id = $1',
+		[id_layer]
+	);
+};
 module.exports = LayerModel;

@@ -1,5 +1,4 @@
 pgsql:
-  restart: always
   image: postgres:9.4
   volumes_from:
     - geocat_pgdata
@@ -8,21 +7,26 @@ pgsql:
     service: passwords
 
 backend:
-  restart: always
   build: backend
-  ports:
-    - 3000:3000
+
   links:
     - pgsql:pgsql
+
   environment:
     - PORT=3000
     - POSTGRES_HOST=pgsql
     - POSTGRES_DB=geocat
 
   command: nodemon -L
-  volumes:
-    - ./backend:/usr/src/app
+  #command: bin/infinitystart
 
   extends:
     file: docker-compose.private.yml
     service: passwords
+
+  # DEV
+  ports:
+    - 3000:3000
+  
+  volumes:
+    - ./backend:/usr/src/app

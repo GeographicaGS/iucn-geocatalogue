@@ -48,6 +48,9 @@ $(function() {
         if (jqxhr.status == 404) {
             App.router.navigate('notfound',{trigger: true});
         }
+        else if (jqxhr.status == 401) {
+            App.router.navigate('login',{trigger: true});
+        }
         else {
             App.router.navigate('error',{trigger: true});
         }

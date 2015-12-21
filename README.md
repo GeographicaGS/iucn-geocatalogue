@@ -2,10 +2,14 @@
 
 ## Create data container
 ```
-docker create --name mexicodf_pgdata -v /var/lib/postgresql/data debian /bin/true
+docker create --name geocat_pgdata -v /var/lib/postgresql/data debian /bin/true
 ```
 
 ## Initiate database
+Create a private.yml file
+```
+cp docker-compose.private.sample.yml docker-compose.private.yml
+```
 ### Start the database container
 ```
 docker-compose -f docker-compose.production.yml up pgsql

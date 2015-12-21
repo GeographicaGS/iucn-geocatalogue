@@ -37,7 +37,6 @@ frontend/src/js/Config.js
 frontend/www/index.html
 frontend/www/js/main.min.js
 frontend/www/css/styles.min.css
-frontend/s3_website.yml
 frontend/src/css/lib/Pepa/*
 frontend/src/build/Sting/*
 

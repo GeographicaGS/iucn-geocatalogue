@@ -24,10 +24,11 @@ App.View.Layer = Backbone.View.extend({
         'click #create-new-btn' : 'createLayer',
         'click .state li' : 'changeState',
         'click #addKeyword' : 'addKeyword',
-        'click .delkw': 'removeKeyword'
+        'click .delkw': 'removeKeyword',
+        'click .delete-btn' : 'delete'
 
         // "click .cancel-btn" : "cancelEdit",
-        // "click .save-btn" : "save"
+       // "click .save-btn" : "save"
     },
 
     expandPanel: function(e){
@@ -184,5 +185,13 @@ App.View.Layer = Backbone.View.extend({
       e.preventDefault();
       var $target = $(e.currentTarget);
       $target.parent().remove();
+    },
+
+    delete: function(){
+        var r = confirm('Are you sure?');
+        if (r)
+            this.model.destroy({ success: function(model, response) {
+                App.router.navigate('layers',{trigger:true});
+            }});
     }
 });

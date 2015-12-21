@@ -10,8 +10,6 @@ pgsql:
 backend:
   restart: always
   build: backend
-  ports:
-    - 3000:3000
   links:
     - pgsql:pgsql
   environment:

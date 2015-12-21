@@ -70,6 +70,7 @@ App.View.LayerBasicInformation = Backbone.View.extend({
         this.model.save('', '',
             {success: function(){
                 _this.superView.closePanel($(e.currentTarget));
+                _this.superView.render();
                 _this.render();
             }
         });

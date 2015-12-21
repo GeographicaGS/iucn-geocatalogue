@@ -7,7 +7,7 @@ var UserModel = db.UserModel;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'IUCN GEOCATALOGUE API' });
 });
 
 router.get('/is_logged', auth, function(req, res, next) {

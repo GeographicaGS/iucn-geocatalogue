@@ -1,14 +1,15 @@
-var config = require("./config.js");
 var md5 = require('MD5');
 var db = require('./db/db.js');
 var UserModel = db.UserModel;
+
+var AUTHTIMESTAMPTTL = 1000 * 60 * 5; // each 5 minutes
 
 function authenticate(req, res, next) {
 	
 	var credentials = {
       hash : req.get("auth-hash"),
       username :req.get("auth-username"),
-      timestamp : req.get("auth-timestamp")
+      timestamp : parseInt(req.get("auth-timestamp"))
   };
 
   if (!credentials.hash || !credentials.username || !credentials.timestamp){
@@ -24,9 +25,9 @@ function authenticate(req, res, next) {
   		if(users && users.length == 1){
   			var user = users[0];
 
-  			if ((currentTime - credentials.timestamp) / 1000   > config.authTimestampLiveTime) {
+  			if ((currentTime - credentials.timestamp)  > AUTHTIMESTAMPTTL) {
 
-          res.status(401)
+          res.status(401);
           res.json({
               "messsage" : "Expired request"
           });

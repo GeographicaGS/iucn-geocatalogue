@@ -34,4 +34,12 @@ router.put('/layer/:id', isAdmin, function(req, res, next) {
 	});
 });
 
+router.delete('/layer/:id', isAdmin, function(req, res, next) {
+	var id = req.params.id;
+	//res.json({'results':true});
+	LayerModel.deleteLayer(id,function(err,layer){
+		res.json({'results':true});
+	});
+});
+
 module.exports = router;
