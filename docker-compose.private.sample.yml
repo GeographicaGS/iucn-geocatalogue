@@ -1,0 +1,4 @@
+passwords:
+  environment:
+    - POSTGRES_USER=XXX
+    - POSTGRES_PASSWORD=XXX

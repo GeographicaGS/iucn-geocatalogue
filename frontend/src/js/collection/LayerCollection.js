@@ -2,7 +2,7 @@
 
 App.Collection.Layers = Backbone.Collection.extend({
 
-	url: App.config.API_URL + '/get_layer_list/',
+	url: App.config.API_URL + '/layer/',
 
     initialize: function(models, options) {
 

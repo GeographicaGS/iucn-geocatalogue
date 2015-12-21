@@ -11,25 +11,26 @@
 				<div class="form-group">
 					<span class="label edit">ID Code Num</span>
 					<input  id="layerIdcodenum" class="edit" type="text" name="id_code_num" maxlength="255">
-					<span class="label inline edit">Name</span>
-					<input id="layerName" class="edit inline" type="text" name="name" maxlength="255">
+				</div>
+
+				<div class="form-group">
+					<span class="label edit">Name</span>
+					<input id="layerName" class="edit" type="text" name="name" maxlength="255">
 				</div>
 
 				<div class="form-group">
 					<span class="label edit">Department</span>
 					<input  id="layerDepartment" class="edit" type="text" name="department" maxlength="100">
-					<span class="label inline edit">Theme</span>
-					<input id="layerTheme" class="edit inline" type="text" name="theme" maxlength="100">
 				</div>
 
 				<div class="form-group">
-					<span class="label edit">Subtheme</span>
-					<input  id="layerSubtheme" class="edit" type="text" name="subtheme" maxlength="100">
-					<span class="label inline edit">Family</span>
-					<input id="layerFamily" class="edit inline" type="text" name="family" maxlength="100">
+					<span class="label edit">Theme</span>
+					<input id="layerTheme" class="edit" type="text" name="theme" maxlength="100">
+					<span class="label edit inline">Subtheme</span>
+					<input  id="layerSubtheme" class="edit inline" type="text" name="subtheme" maxlength="100">
 				</div>
 
-				<div class="form-group">
+				<div class="form-group separator">
 					<span class="label">Summary</span>
 					<textarea id="layerSummary" name="summary" class="edit"></textarea>
 				</div><!-- form-group -->
@@ -37,18 +38,31 @@
 				<div class="form-group">
 					<span class="label">Keywords</span>
 					<div id="layerKeywords">
-						<input type="text" class="keyword" class="edit" maxlength="100">
+						<div>
+							<input type="text" class="keyword" name="keyword" class="edit" maxlength="100">
+							<a href="#" class="delkw">Delete</a>
+						</div>
 						<p class="label"><a href='#' id="addKeyword">Add keyword</a></p>
 					</div>
 				</div><!-- form-group -->
 
 				<div class="form-group">
-					<span class="label">Type of file</span>
-					<input id="layerFiletype" type="text" name="filetype" class="edit" maxlength="50">
+					<span class="label edit">Family</span>
+					<input id="layerFamily" class="edit" type="text" name="family" maxlength="100">
+				</div>
+
+				<div class="form-group separator">
+					<span class="label">Project name</span>
+					<input id="layerProjectname" class="edit" type="text" name="project_name" maxlength="255">
 				</div><!-- form-group -->
 
 				<div class="form-group">
-					<span class="label">CRS/SRS</span>
+					<span class="label">Publication</span>
+					<input id="layerPublication" class="edit" type="text" name="publication">
+				</div><!-- form-group -->
+
+				<div class="form-group separator">
+					<span class="label">CRS (EPSG)</span>
 					<input  id="layerCrs" class="edit" type="text" name="crs" maxlength="50">
 					<span class="label inline">Extension</span>
 					<select name="extension" id="layerExtension">
@@ -59,22 +73,23 @@
 				</div><!-- form-group -->
 
 				<div class="form-group">
-					<span class="label">Bounding box</span>
-					<input  id="layerBoundingbox" class="edit" type="text" name="bounding_box" maxlength="50">
-					<span class="label inline">Scale</span>
-					<input id="layerScale" class="edit inline" type="text" name="scale" maxlength="10">
+					<span class="label">Scale</span>
+					<input id="layerScale" class="edit" type="text" name="scale" maxlength="10">
 				</div>
 
-				<div class="form-group">
-					<span class="label">Review date</span>
-					<input id="layerReviewdate" class="edit hasDatePicker" type="text" name="review_date" maxlength="50">
-					<span class="label inline">Edition date</span>
-					<input id="layerEditiondate" class="edit hasDatePicker" type="text" name="edition_date" maxlength="50">
+				<!-- <div class="form-group">
+					<span class="label">Bounding box</span>
+					<input  id="layerBoundingbox" class="edit" type="text" name="bounding_box" maxlength="50">
+				</div> -->
+
+				<div class="form-group separator">
+					<span class="label">Filepath link</span>
+					<input id="layerFilelink" class="edit" type="text" name="link">
 				</div><!-- form-group -->
 
 				<div class="form-group">
-					<span class="label">Project name</span>
-					<input id="layerProjectname" class="edit" type="text" name="project_name" maxlength="255">
+					<span class="label">File format</span>
+					<input id="layerFiletype" type="text" name="filetype" class="edit" maxlength="50">
 				</div><!-- form-group -->
 
 				<div class="form-group">
@@ -82,17 +97,14 @@
 					<input id="layerFile source" class="edit" type="text" name="source">
 				</div><!-- form-group -->
 
-				<div class="form-group">
-					<span class="label">Publication</span>
-					<input id="layerPublication" class="edit" type="text" name="publication">
+				<div class="form-group separator hide">
+					<span class="label">Edition date</span>
+					<input id="layerEditiondate" class="edit hasDatePicker" type="text" name="edition_date" maxlength="50">
+					<span class="label inline">Review date</span>
+					<input id="layerReviewdate" class="edit hasDatePicker" type="text" name="review_date" maxlength="50">
 				</div><!-- form-group -->
 
-				<div class="form-group">
-					<span class="label">File link</span>
-					<input id="layerFilelink" class="edit" type="text" name="link">
-				</div><!-- form-group -->
-
-				<div class="form-group">
+				<div class="form-group separator">
 					<span class="label">Data responsible</span>
 					<input id="layerDataresponsible" class="edit" type="text" name="data_responsible" maxlength="255">
 				</div><!-- form-group -->
@@ -112,7 +124,7 @@
 					<textarea id="layerAccesslimitation" name="access_limitation" class="edit"></textarea>
 				</div><!-- form-group -->
 
-				<div class="form-group">
+				<div class="form-group separator">
 					<span class="label">Other information</span>
 					<textarea id="layerOtherinformation" name="other_info" class="edit"></textarea>
 				</div><!-- form-group -->

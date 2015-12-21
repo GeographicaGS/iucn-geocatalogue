@@ -899,6 +899,9 @@ table {
             span.label {
                 display: inline-block;
             }
+            .form-group.edit  {
+              display: flex;
+            }
             .corX,
             .corY {
                 display: flex;
@@ -1051,7 +1054,7 @@ table {
     .form-group {
         position: relative;
         padding: 10px 48px 10px 0;
-        border-bottom: 1px solid @g20;
+        // border-bottom: 1px solid @g20;
         display: flex;
         align-items: center;
         line-height: 20px;
@@ -1083,6 +1086,11 @@ table {
         }
         &.inline-edit {
             padding-right: 48px + 40;
+        }
+        &.separator {
+          border-top: 1px solid @g20;
+          padding-top: 20px;
+          margin-top: 10px;
         }
         & > .label {
             color: @g40;
@@ -1152,7 +1160,32 @@ table {
                 opacity: 1;
             }
         } //close-bt
-    } //form-grouop
+
+        #layerKeywords {
+          min-width: 300px;
+          ul {
+            padding-left: 15px;
+            list-style: disc;
+
+            li {
+              text-transform: capitalize;
+            }
+          }
+
+          .keyword {
+            max-width: 250px;
+            margin-bottom: 5px;
+          }
+
+          .delkw {
+            margin-left: 5px;
+          }
+        }
+
+        textarea {
+          margin-top: 0;
+        }
+    } //form-group
     .label.inline,
     .span:nth-of-type(2) {
         // text-align: right;
@@ -1484,7 +1517,8 @@ table {
     }
     .form-group {
         .label {
-            align-self: center;
+            //align-self: center;
+            margin-top: 5px;
         }
         &.password {
             opacity: .5;

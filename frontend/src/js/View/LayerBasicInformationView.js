@@ -33,42 +33,43 @@ App.View.LayerBasicInformation = Backbone.View.extend({
     },
 
     save:function(e){
-        this.model.set({
-            solicitante: this.$('input[name="solicitante"]').val(),
-            // dni: this.$('input[name="dni"]').val(),
-            email: this.$('input[name="email"]').val(),
-            tlf: this.$('input[name="tlf"]').val(),
-            sector_actividad: this.$('select[name="sector"]').val(),
-            sector: this.$('select[name="sector"] option[value ="' + this.$('select[name="sector"]').val() + '"]').text(),
-            promovido_por_mujer: this.$('input[name="promovido_por_mujer"]').is(':checked'),
-            promovido_por_joven: this.$('input[name="promovido_por_joven"]').is(':checked'),
-            g1_igualdad_h_m: this.$('input[name="g1_igualdad_h_m"]').is(':checked'),
-            g2_formacion_igualdad_empleo: this.$('input[name="g2_formacion_igualdad_empleo"]').is(':checked'),
-            g3_autoempleo_empleo_calidad_mujeres: this.$('input[name="g3_autoempleo_empleo_calidad_mujeres"]').is(':checked'),
-            g4_conciliacion_laboral_familiar: this.$('input[name="g4_conciliacion_laboral_familiar"]').is(':checked'),
-            g5_fomento_participacion_mujeres: this.$('input[name="g5_fomento_participacion_mujeres"]').is(':checked'),
-            g6_conocimiento_mujeres: this.$('input[name="g6_conocimiento_mujeres"]').is(':checked'),
-            g7_ocio_enfoque_genero: this.$('input[name="g7_ocio_enfoque_genero"]').is(':checked'),
-            g8_otra_cat_incidencia: this.$('input[name="g8_otra_cat_incidencia"]').is(':checked'),
-            j1_educacion_valores_juventud: this.$('input[name="j1_educacion_valores_juventud"]').is(':checked'),
-            j2_formacion_juventud: this.$('input[name="j2_formacion_juventud"]').is(':checked'),
-            j3_autoempleo_empleo_calidad_juventud: this.$('input[name="j3_autoempleo_empleo_calidad_juventud"]').is(':checked'),
-            j4_participacion_juventud: this.$('input[name="j4_participacion_juventud"]').is(':checked'),
-            j5_conocimiento_juventud: this.$('input[name="j5_conocimiento_juventud"]').is(':checked'),
-            j6_ocio_juventud: this.$('input[name="j6_ocio_juventud"]').is(':checked'),
-            j7_otra_cat_incidencia: this.$('input[name="j7_otra_cat_incidencia"]').is(':checked'),
-            coord_x: this.$('input[name="coord_x"]').val(),
-            coord_y: this.$('input[name="coord_y"]').val(),
-            descripcion: this.$('textarea[name="descripcion"]').val(),
+        var keywords = [];
+        $('input[name="keyword"]').each(function(){
+          keywords.push($(this).val());
+        });
 
+        this.model.set({
+          id_code_num: this.$('input[name="id_code_num"]').val(),
+          name: this.$('input[name="name"]').val(),
+          department: this.$('input[name="department"]').val(),
+          theme: this.$('input[name="theme"]').val(),
+          subtheme: this.$('input[name="subtheme"]').val(),
+          family: this.$('input[name="family"]').val(),
+          summary: this.$('textarea[name="summary"]').val(),
+          filetype: this.$('input[name="filetype"]').val(),
+          crs: this.$('input[name="crs"]').val(),
+          extension: this.$('select[name="extension"]').val(),
+          //bounding_box: this.$('input[name="bounding_box"]').val(),
+          scale: this.$('input[name="scale"]').val(),
+          review_date: this.$('input[name="review_date"]').val(),
+          edition_date: this.$('input[name="edition_date"]').val(),
+          project_name: this.$('input[name="project_name"]').val(),
+          source: this.$('input[name="source"]').val(),
+          publication: this.$('input[name="publication"]').val(),
+          link: this.$('input[name="link"]').val(),
+          data_responsible: this.$('input[name="data_responsible"]').val(),
+          metadata_responsible: this.$('input[name="metadata_responsible"]').val(),
+          language: this.$('input[name="language"]').val(),
+          access_limitation: this.$('textarea[name="access_limitation"]').val(),
+          other_info: this.$('textarea[name="other_info"]').val(),
+          keywords: keywords
         });
 
         var _this = this;
-        this.model.url = App.config.API_URL + "/post_layer_basic/" + this.model.get('id');
+        this.model.url = App.config.API_URL + "/layer/" + this.model.get('id');
         this.model.save('', '',
             {success: function(){
                 _this.superView.closePanel($(e.currentTarget));
-                // App.mapView.resetAppliesGeoms()
                 _this.render();
             }
         });
@@ -88,10 +89,16 @@ App.View.LayerBasicInformation = Backbone.View.extend({
     },
 
     render: function() {
+        var layer= this.model.toJSON();
         this.$el.html(this._template({
-            layer : this.model.toJSON()
+            layer : layer
         }));
-        this.$('input.hasDatePicker').datepicker({dateFormat:'dd/mm/yy'});
+        var edition_date = new Date(layer.edition_date);
+        this.$('#layerEditiondate').val(edition_date.toJSON());
+        this.$('#layerEditiondate + span').html(edition_date.toLocaleDateString());
+        var review_date = new Date(layer.review_date);
+        this.$('#layerReviewdate').val(review_date.toJSON());
+        this.$('#layerReviewdate + span').html(review_date.toLocaleDateString());
         return this;
     },
 

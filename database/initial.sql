@@ -83,4 +83,4 @@ WITH (
 INSERT INTO data.profile(id, name)
   VALUES (1, 'Lector');
 INSERT INTO data.profile(id, name)
-  VALUES (3, 'Administador');
+  VALUES (3, 'Administrador');

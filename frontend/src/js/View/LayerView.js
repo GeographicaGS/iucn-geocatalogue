@@ -19,10 +19,12 @@ App.View.Layer = Backbone.View.extend({
     },
 
     events: {
-        "click .panel-toggle" : "expandPanel",
-        "click .edit-btn" : "activateEdit",
+        'click .panel-toggle' : 'expandPanel',
+        'click .edit-btn' : 'activateEdit',
         'click #create-new-btn' : 'createLayer',
         'click .state li' : 'changeState',
+        'click #addKeyword' : 'addKeyword',
+        'click .delkw': 'removeKeyword'
 
         // "click .cancel-btn" : "cancelEdit",
         // "click .save-btn" : "save"
@@ -63,7 +65,7 @@ App.View.Layer = Backbone.View.extend({
 
             var keywords = [];
             $('input[name="keyword"]').each(function(){
-              keywords.append($(this).val());
+              keywords.push($(this).val());
             })
 
             this.model.set({
@@ -76,7 +78,7 @@ App.View.Layer = Backbone.View.extend({
                 summary: this.$('textarea[name="summary"]').val(),
                 filetype: this.$('input[name="filetype"]').val(),
                 crs: this.$('input[name="crs"]').val(),
-                extension: this.$('input[name="extension"]').val(),
+                extension: this.$('select[name="extension"]').val(),
                 bounding_box: this.$('input[name="bounding_box"]').val(),
                 scale: this.$('input[name="scale"]').val(),
                 review_date: this.$('input[name="review_date"]').val(),
@@ -89,17 +91,16 @@ App.View.Layer = Backbone.View.extend({
                 metadata_responsible: this.$('input[name="metadata_responsible"]').val(),
                 language: this.$('input[name="language"]').val(),
                 access_limitation: this.$('textarea[name="access_limitation"]').val(),
-                other_info: this.$('input[name="other_info"]').val(),
+                other_info: this.$('textarea[name="other_info"]').val(),
                 keywords: keywords
             });
 
-            this.model.url = App.config.API_URL + '/post_new_layer'
+            this.model.url = App.config.API_URL + '/layer'
 
             var _this = this;
             this.model.save('', '',
                 {success: function(model,response){
-                    App.router.navigate('program/' + App.programView.current + '/layer/' + response.results.id ,{trigger: true});
-                    // App.mapView.resetAppliesGeoms()
+                    App.router.navigate('/layers/' + response.results.id[0].id ,{trigger: true});
                 }
             });
 
@@ -158,6 +159,10 @@ App.View.Layer = Backbone.View.extend({
         this.$el.html(this._new_layer_template({
             layer : this.model.toJSON()
         }));
+        var today = new Date();
+        var todayStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        this.$('input#layerEditiondate').val(today.toJSON());
+        this.$('input#layerReviewdate').val(today.toJSON());
     },
 
     closePanel:function(elem){
@@ -168,4 +173,16 @@ App.View.Layer = Backbone.View.extend({
         this.$('#plannedInvestment').text(App.formatNumber(inversion_prevista) + ' ' + '€');
         this.$('#subventionGrant').text(App.formatNumber(subvencion_concedida) + ' ' + '€');
     },
+
+    addKeyword: function(e){
+      e.preventDefault();
+      var $target = $(e.currentTarget);
+      $('<div><input type="text" class="keyword" name="keyword" maxlength="100"><a href="#" class="delkw">Delete</a></div>').insertBefore($target.parent());
+    },
+
+    removeKeyword: function(e){
+      e.preventDefault();
+      var $target = $(e.currentTarget);
+      $target.parent().remove();
+    }
 });

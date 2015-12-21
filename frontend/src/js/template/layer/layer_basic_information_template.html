@@ -8,26 +8,27 @@
 </div><!-- panel-header -->
 <div class="panel-body">
 	<form action="" class="application-form ">
-		<div class="form-group">
-			<span class="label edit">ID Code Num</span>
-			<input disabled id="layerIdcodenum" class="edit" type="text" name="id_code_num" maxlength="255" value="<%=layer.id_code_num%>">
-			<span class="label inline edit">Name</span>
-			<input id="layerName" class="edit inline" type="text" name="name" maxlength="255" value="<%=layer.name%>">
+		<div class="form-group edit">
+			<span class="label">ID Code Num</span>
+			<input id="layerIdcodenum" class="edit" type="text" name="id_code_num" maxlength="255" value="<%=layer.id_code_num%>">
+		</div>
+		<div class="form-group edit">
+			<span class="label">Name</span>
+			<input id="layerName" class="edit" type="text" name="name" maxlength="255" value="<%=layer.name%>">
 		</div>
 
-		<div class="form-group">
-			<span class="label edit">Department</span>
-			<input disabled id="layerDepartment" class="edit" type="text" name="department" maxlength="100" value="<%=layer.department%>">
+		<div class="form-group edit">
+			<span class="label">Department</span>
+			<input id="layerDepartment" class="edit" type="text" name="department" maxlength="100" value="<%=layer.department%>">
 		</div>
 
-		<div class="form-group">
-			<span class="label inline edit">Theme</span>
-			<input id="layerTheme" class="edit inline" type="text" name="theme" maxlength="100" value="<%=layer.theme%>">
+		<div class="form-group edit">
+			<span class="label">Theme</span>
+			<input id="layerTheme" class="edit" type="text" name="theme" maxlength="100" value="<%=layer.theme%>">
 		</div>
-
-		<div class="form-group">
-			<span class="label edit">Subtheme</span>
-			<input disabled id="layerSubtheme" class="edit" type="text" name="subtheme" maxlength="100" value="<%=layer.subtheme%>">
+		<div class="form-group edit">
+			<span class="label">Subtheme</span>
+			<input id="layerSubtheme" class="edit" type="text" name="subtheme" maxlength="100" value="<%=layer.subtheme%>">
 		</div>
 
 		<div class="form-group">
@@ -35,106 +36,115 @@
 			<textarea id="layerSummary" name="summary" class="edit"><%=layer.summary%></textarea>
 			<span class="edit-mode"><%=layer.summary%></span>
 		</div><!-- form-group -->
-
 		<div class="form-group">
 			<span class="label">Keywords</span>
 			<div id="layerKeywords">
-				<% _.each(layer.keywords, function(value){ %>
-				<input type="text" name="kw_<%=value%>" value="<%=value%>" class="edit" maxlength="100">
-				<li class="edit-mode"><%=value%></li>
-				<% }); %>
+				<ul>
+					<% _.each(layer.keywords, function(value){ %>
+						<input type="text" name="keyword" value="<%=value%>" class="edit" maxlength="100">
+						<li class="edit-mode"><%=value%></li>
+					<% }); %>
+				</ul>
 			</div>
 		</div>
-
-		<div class="form-group">
-			<span class="label inline <% if(layer.family){ %>edit<% } %>">Family</span>
-			<input id="layerFamily" class="edit inline" type="text" name="family" maxlength="100" value="<%=layer.family%>">
-			<% if(layer.family){ %><span><%=layer.extension%></span><% } %>
+		<div class="form-group <% if(!layer.family){ %>edit<% } %>">
+			<span class="label <% if(!layer.family){ %>edit<% } %>">Family</span>
+			<input id="layerFamily" class="edit" type="text" name="family" maxlength="100" value="<%=layer.family%>">
+			<% if(layer.family){ %><span><%=layer.family%></span><% } %>
 		</div><!-- form-group -->
 
-		<div class="form-group">
-			<span class="label">Type of file</span>
-			<input id="layerFiletype" type="text" name="filetype" value="<%=layer.filetype%>" class="edit" maxlength="50">
-			<span class="edit-mode"><%=layer.filetype%></span>
-		</div><!-- form-group -->
+		<!-- separator -->
 
-		<div class="form-group">
-			<span class="label">CRS (EPSG)</span>
-			<input disabled id="layerCrs" class="edit" type="text" name="crs" maxlength="50" value="<%=layer.crs%>">
-			<span><%=layer.crs%></span>
-			<span class="label inline">Extension</span>
-			<input id="layerExtension" class="edit inline" type="text" name="extension" maxlength="100" value="<%=layer.extension%>">
-			<span><%=layer.extension%></span>
-
-		</div><!-- form-group -->
-
-		<div class="form-group">
-			<span class="label">Bounding box</span>
-			<input disabled id="layerBoundingbox" class="edit" type="text" name="bounding_box" maxlength="50" value="<%=layer.bounding_box%>">
-			<span><% if(layer.bounding_box){ %><%=layer.bounding_box%><% }else{ %>-<% } %></span>
-			<span class="label inline">Scale</span>
-			<input id="layerScale" class="edit inline" type="text" name="scale" maxlength="10" value="<%=layer.scale%>">
-			<span><% if(layer.scale){ %><%=layer.scale%><% }else{ %>-<% } %></span>
-		</div>
-
-		<div class="form-group">
-			<span class="label">Review date</span>
-			<input id="layerReviewdate" class="edit hasDatePicker" type="text" name="review_date" maxlength="50" value="<%=layer.review_date%>">
-			<span><%=layer.review_date%></span>
-			<span class="label inline">Edition date</span>
-			<input id="layerEditiondate" class="edit hasDatePicker" type="text" name="edition_date" maxlength="50" value="<%=layer.edition_date%>">
-			<span><%=layer.edition_date%></span>
-		</div><!-- form-group -->
-
-		<div class="form-group">
+		<div class="form-group separator">
 			<span class="label">Project name</span>
 			<input id="layerProjectname" class="edit" type="text" name="project_name" maxlength="255" value="<%=layer.project_name%>">
 			<span><%=layer.project_name%></span>
 		</div><!-- form-group -->
-
+		<div class="form-group">
+			<span class="label">Publication</span>
+			<input id="layerPublication" class="edit" type="text" name="publication" value="<%=layer.publication%>">
+			<span><% if(layer.publication){ %><%=layer.publication%><% }else{ %>-<% } %></span>
+		</div><!-- form-group -->
 		<div class="form-group">
 			<span class="label">File source</span>
 			<input id="layerFile source" class="edit" type="text" name="source" value="<%=layer.source%>">
 			<span><%=layer.source%></span>
 		</div><!-- form-group -->
 
-		<div class="form-group">
-			<span class="label">Publication</span>
-			<input id="layerPublication" class="edit" type="text" name="publication" value="<%=layer.publication%>">
-			<span><% if(layer.publication){ %><%=layer.publication%><% }else{ %>-<% } %></span>
-		</div><!-- form-group -->
+		<!-- separator -->
 
+		<div class="form-group separator">
+			<span class="label">Data creation</span>
+			<input id="layerEditiondate" class="edit hasDatePicker hide" type="text" name="edition_date" maxlength="50" value="<%=layer.edition_date%>">
+			<span><%=layer.edition_date%></span>
+		</div><!-- form-group -->
 		<div class="form-group">
-			<span class="label">File link</span>
+			<span class="label">Last review</span>
+			<input id="layerReviewdate" class="edit hasDatePicker hide" type="text" name="review_date" maxlength="50" value="<%=layer.review_date%>">
+			<span><%=layer.review_date%></span>
+		</div>
+
+		<!-- separator -->
+
+		<div class="form-group separator">
+			<span class="label">CRS (EPSG)</span>
+			<input disabled id="layerCrs" class="edit" type="text" name="crs" maxlength="50" value="<%=layer.crs%>">
+			<span><%=layer.crs%></span>
+		</div><!-- form-group -->
+		<div class="form-group">
+			<span class="label">Extension</span>
+			<select name="extension" id="layerExtension" class="edit">
+					<option value="med" <% if (layer.extension == 'med'){ %>selected<% } %>>Mediterranean sea</option>
+					<option value="world" <% if (layer.extension == 'world'){ %>selected<% } %>>World</option>
+					<option value="country" <% if (layer.extension == 'country'){ %>selected<% } %>>Country</option>
+			</select>
+			<span><%=layer.extension%></span>
+		</div><!-- form-group -->
+		<div class="form-group">
+			<span class="label">Scale</span>
+			<input id="layerScale" class="edit inline" type="text" name="scale" maxlength="10" value="<%=layer.scale%>">
+			<span><% if(layer.scale){ %><%=layer.scale%><% }else{ %>-<% } %></span>
+		</div>
+
+		<!-- separator -->
+
+		<div class="form-group separator">
+			<span class="label">Filepath link</span>
 			<input id="layerFilelink" class="edit" type="text" name="link" value="<%=layer.link%>">
 			<span><a href="file://<%=layer.link%>" target="_blank"><%=layer.link%></a></span>
 		</div><!-- form-group -->
-
 		<div class="form-group">
+			<span class="label">File format</span>
+			<input id="layerFiletype" type="text" name="filetype" value="<%=layer.filetype%>" class="edit" maxlength="50">
+			<span class="edit-mode"><%=layer.filetype%></span>
+		</div><!-- form-group -->
+
+		<!-- separator -->
+
+		<div class="form-group separator">
 			<span class="label">Data responsible</span>
 			<input id="layerDataresponsible" class="edit" type="text" name="data_responsible" maxlength="255" value="<%=layer.data_responsible%>">
 			<span><%=layer.data_responsible%></span>
 		</div><!-- form-group -->
-
 		<div class="form-group">
 			<span class="label">Metadata responsible</span>
 			<input id="layerMetadataresponsible" class="edit" type="text" name="metadata_responsible" maxlength="255" value="<%=layer.metadata_responsible%>">
 			<span><%=layer.metadata_responsible%></span>
 		</div><!-- form-group -->
-
 		<div class="form-group">
 			<span class="label">Language</span>
 			<input id="layerLanguage" class="edit" type="text" maxlength="50" name="language" value="<%=layer.language%>">
 			<span><%=layer.language%></span>
 		</div><!-- form-group -->
-
 		<div class="form-group">
 			<span class="label">Access limitation</span>
 			<textarea id="layerAccesslimitation" name="access_limitation" class="edit"><%=layer.access_limitation%></textarea>
 			<span class="edit-mode"><% if(layer.access_limitation){ %><%=layer.access_limitation%><% }else{ %>-<% } %></span>
 		</div><!-- form-group -->
 
-		<div class="form-group">
+		<!-- separator -->
+
+		<div class="form-group separator">
 			<span class="label">Other information</span>
 			<textarea id="layerOtherinformation" name="other_info" class="edit"><%=layer.other_info%></textarea>
 			<span class="edit-mode"><% if(layer.other_info){ %><%=layer.other_info%><% }else{ %>-<% } %></span>
