@@ -177,8 +177,9 @@ App.View.Layer = Backbone.View.extend({
 
     addKeyword: function(e){
       e.preventDefault();
-      var $target = $(e.currentTarget);
-      $target.parent().parent().find('ul').append($('<li><input type="text" class="keyword edit" name="keyword" maxlength="100"><a href="#" class="delkw">Delete</a></li>'));
+      var $target = $('#layerKeywords ul');
+      if ($target.length === 0) $target = $('#layerKeywords');
+      $target.append($('<li><input type="text" class="keyword edit" name="keyword" maxlength="100"><a href="#" class="delkw">Delete</a></li>'));
     },
 
     removeKeyword: function(e){
