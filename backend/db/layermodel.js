@@ -37,7 +37,6 @@ LayerModel.prototype.insertLayer = function(layer,callback){
 				[insertId[0].id, keyword]
 			);
 		}
-		// console.log('Callback en layermodel: ' + callback);
 		callback(err,{id: insertId[0].id});
 	},
 		'INSERT INTO data.layer(id_code_num, department, theme, subtheme, family, name, filetype, crs, extension, scale, review_date, edition_date, summary, project_name, source, publication, link, data_responsible, metadata_responsible, language, access_limitation, other_info) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22) RETURNING id',

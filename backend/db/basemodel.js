@@ -12,7 +12,6 @@ function BaseModel() {
 }
 
 BaseModel.prototype.query = function(callback,query,parameters){
-  // console.log('Callback general para '+ query + ' -> ' + callback);
 	pg.connect(this._conString, function(err, db, done) {
     if(!err){
   		db.query(query,parameters, function(err, result) {
