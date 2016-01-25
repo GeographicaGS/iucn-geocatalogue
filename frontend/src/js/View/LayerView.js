@@ -25,7 +25,8 @@ App.View.Layer = Backbone.View.extend({
         'click .state li' : 'changeState',
         'click #addKeyword' : 'addKeyword',
         'click .delkw': 'removeKeyword',
-        'click .delete-btn' : 'delete'
+        'click .delete-btn' : 'delete',
+        'click .copytoclipboard': 'copyLinkToClipboard'
 
         // "click .cancel-btn" : "cancelEdit",
        // "click .save-btn" : "save"
@@ -194,5 +195,24 @@ App.View.Layer = Backbone.View.extend({
             this.model.destroy({ success: function(model, response) {
                 App.router.navigate('layers',{trigger:true});
             }});
+    },
+
+    copyLinkToClipboard: function(e){
+      e.preventDefault();
+      var link = e.currentTarget.href;
+      var $dummyTextArea = $('<textarea style="position:absolute;opacity:0;">' + link + '</textarea>');
+      $('body').append($dummyTextArea);
+      $dummyTextArea[0].select();
+      try {
+        var successful = document.execCommand('copy');
+        if(successful){
+          alert('The file path was succesfully copied to the clipboard. Please, open a new tab and paste it to access to the file.');
+        }else{
+          alert('There was an error copying the file path to the clipboard. Please, try again or copy it manually.');
+        }
+      } catch (err) {
+        alert('There was an error copying the file path to the clipboard. Please, try again or copy it manually.');
+      }
+      $dummyTextArea.remove();
     }
 });

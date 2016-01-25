@@ -46,7 +46,7 @@ CREATE TABLE data.layer
   filetype character varying(100) NOT NULL,
   crs character varying(50) NOT NULL,
   extension character varying(100) NOT NULL,
-  scale character varying(10),
+  scale character varying(20),
   review_date date NOT NULL,
   edition_date date NOT NULL,
   summary text NOT NULL,

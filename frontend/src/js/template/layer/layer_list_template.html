@@ -11,25 +11,24 @@
 								<div class="search-form-group">
 									<span class="ico-search"></span>
 									<input class="search-input" type="text" name="search" placeholder="Buscar">
+									<select class="search-category">
+										<option value="" selected>All</option>
+										<option value="name">Name</option>
+										<option value="department">Area</option>
+										<option value="theme">Theme</option>
+										<option value="subtheme">Subtheme</option>
+										<option value="family">Family</option>
+										<option value="keywords">Keywords</option>
+									</select>
 									<span class="close-search-btn"></span>
 								</div>
 							</th>
-							<th><span>Department</span></th>
+							<th><span>Area</span></th>
 							<th><span>Theme</span></th>
 						</tr>
 					</thead>
 
 					<tbody>
-						<%  _.each(layers,function (layer){ %>
-							<tr data-layer="<%=layer.id%>">
-								<td title="<%=layer.name%>">
-									<span class="number"><%=layer.id_code_num%></span>
-									<span class="denomination"><%=layer.name%></span>
-								</td>
-								<td><span class="town"><%=layer.department%></span></td>
-								<td title="<%=layer.theme%>"><span class="date"><%=layer.theme%></span></td>
-							</tr>
-						<% }); %>
 					</tbody>
 				</table>
 			</div><!-- inner -->

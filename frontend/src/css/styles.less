@@ -478,6 +478,8 @@ table {
         color: @g80;
         // line-height: 47px;
         background: transparent;
+        flex: 1 1 100%;
+
         &:focus {
             border: 0 none;
             box-shadow: 0;
@@ -510,9 +512,11 @@ table {
     &.open {
         display: flex;
         width: 100%;
-        width: ~"calc(100% - 47px)";
-        float:right;
-
+        // width: ~"calc(100% - 47px)";
+        // float:right;
+        position: absolute;
+        top: 0;
+        left: 0;
         vertical-align: middle;
     }
 } //search-form-group

@@ -8,6 +8,9 @@ var LayerModel = db.LayerModel;
 
 router.get('/layer', auth, function(req, res, next) {
 	LayerModel.getLayerList(function(err,data){
+		data.forEach(function(item){
+			item.keywords = item.keywords.split(',')
+		})
 		res.json({'results':data});
 	});
 });
