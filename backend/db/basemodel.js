@@ -19,7 +19,8 @@ BaseModel.prototype.query = function(callback,query,parameters){
   			if(err) {
           return console.error('error running query', err);
   	    }
-  			callback(err,result.rows);
+        if(callback)
+  			   callback(err,result.rows);
   		});
     }else{
       console.error(err);

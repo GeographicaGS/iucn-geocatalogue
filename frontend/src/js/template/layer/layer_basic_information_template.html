@@ -41,10 +41,14 @@
 			<div id="layerKeywords">
 				<ul>
 					<% _.each(layer.keywords, function(value){ %>
-						<input type="text" name="keyword" value="<%=value%>" class="edit" maxlength="100">
-						<li class="edit-mode"><%=value%></li>
+						<li class="edit-mode">
+							<input type="text" name="keyword" value="<%=value%>" class="keyword edit" maxlength="100">
+							<a href="#" class="delkw edit">Delete</a>
+							<span class=""><%=value%></span>
+						</li>
 					<% }); %>
 				</ul>
+				<p class="label edit"><a href='#' id="addKeyword">Add keyword</a></p>
 			</div>
 		</div>
 		<div class="form-group <% if(!layer.family){ %>edit<% } %>">

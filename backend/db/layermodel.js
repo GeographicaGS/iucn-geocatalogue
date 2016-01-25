@@ -34,10 +34,10 @@ LayerModel.prototype.insertLayer = function(layer,callback){
 		for (keyword of layer.keywords) {
 			BaseModel.query(null,
 				'INSERT into data.layer_keyword(id_layer, keyword) VALUES ($1, $2)',
-				[insertId, keyword]
+				[insertId[0].id, keyword]
 			);
 		}
-		callback(err,{id: insertId});
+		callback(err,{id: insertId[0].id});
 	},
 		'INSERT INTO data.layer(id_code_num, department, theme, subtheme, family, name, filetype, crs, extension, scale, review_date, edition_date, summary, project_name, source, publication, link, data_responsible, metadata_responsible, language, access_limitation, other_info) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22) RETURNING id',
 		[layer.id_code_num, layer.department, layer.theme, layer.subtheme, layer.family, layer.name, layer.filetype, layer.crs, layer.extension, layer.scale, layer.review_date, layer.edition_date, layer.summary, layer.project_name, layer.source, layer.publication, layer.link, layer.data_responsible, layer.metadata_responsible, layer.language, layer.access_limitation, layer.other_info]
@@ -68,7 +68,7 @@ LayerModel.prototype.deleteLayer = function(id_layer,callback){
 
 	BaseModel.query(function(err,insertId){
 		BaseModel.query(function(err,insertId){
-				
+
 				callback(err,null);
 			},
 			'DELETE FROM data.layer_keyword WHERE id_layer = $1', [id_layer]
