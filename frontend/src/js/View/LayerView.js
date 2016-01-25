@@ -101,7 +101,7 @@ App.View.Layer = Backbone.View.extend({
             var _this = this;
             this.model.save('', '',
                 {success: function(model,response){
-                    App.router.navigate('/layers/' + response.results.id[0].id ,{trigger: true});
+                    App.router.navigate('/layers/' + response.results.id ,{trigger: true});
                 }
             });
 
@@ -178,7 +178,7 @@ App.View.Layer = Backbone.View.extend({
     addKeyword: function(e){
       e.preventDefault();
       var $target = $(e.currentTarget);
-      $('<div><input type="text" class="keyword" name="keyword" maxlength="100"><a href="#" class="delkw">Delete</a></div>').insertBefore($target.parent());
+      $target.parent().parent().find('ul').append($('<li><input type="text" class="keyword edit" name="keyword" maxlength="100"><a href="#" class="delkw">Delete</a></li>'));
     },
 
     removeKeyword: function(e){

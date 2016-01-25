@@ -12,6 +12,7 @@ function BaseModel() {
 }
 
 BaseModel.prototype.query = function(callback,query,parameters){
+  // console.log('Callback general para '+ query + ' -> ' + callback);
 	pg.connect(this._conString, function(err, db, done) {
     if(!err){
   		db.query(query,parameters, function(err, result) {
@@ -19,7 +20,8 @@ BaseModel.prototype.query = function(callback,query,parameters){
   			if(err) {
           return console.error('error running query', err);
   	    }
-  			callback(err,result.rows);
+        if(callback)
+  			   callback(err,result.rows);
   		});
     }else{
       console.error(err);
