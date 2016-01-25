@@ -99,10 +99,23 @@
 			<span class="label">Extension</span>
 			<select name="extension" id="layerExtension" class="edit">
 					<option value="med" <% if (layer.extension == 'med'){ %>selected<% } %>>Mediterranean sea</option>
+					<option value="morocco" <% if (layer.extension == 'morocco'){ %>selected<% } %>>Morocco</option>
 					<option value="world" <% if (layer.extension == 'world'){ %>selected<% } %>>World</option>
 					<option value="country" <% if (layer.extension == 'country'){ %>selected<% } %>>Country</option>
 			</select>
-			<span><%=layer.extension%></span>
+			<span>
+				<% if (layer.extension == 'med'){ %>
+					Mediterranean sea
+				<% }else if(layer.extension == 'morocco'){ %>
+					Morocco
+				<% }else if(layer.extension == 'world'){ %>
+					World
+				<% }else if(layer.extension == 'country'){ %>
+					Country
+				<% }else{ %>
+					<%=layer.extension%>
+				<% } %>
+			</span>
 		</div><!-- form-group -->
 		<div class="form-group">
 			<span class="label">Scale</span>
