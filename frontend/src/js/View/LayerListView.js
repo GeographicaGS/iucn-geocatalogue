@@ -3,6 +3,7 @@
 App.View.LayerList = Backbone.View.extend({
 
     _template : _.template( $('#layer-layer_list_template').html() ),
+    _itemtemplate: _.template( $('#layer-layer_listitem_template').html() ),
 
     initialize: function(options) {
         App.events.trigger("menu", 1);
@@ -36,26 +37,19 @@ App.View.LayerList = Backbone.View.extend({
     closeSearch: function(){
         this.$('.search-form-group').removeClass('open');
         this.$('.application-search-btn').removeClass('hide');
+        this.renderAll();
     },
 
     searchLayer: function(e){
-        var rows = this.$(".application-table tr");
-        var text = $(e.currentTarget).val();
-        $(rows).each(function(index, value) {
-            if($(value).find('span.denomination').length > 0 && $(value).find('span.number').length > 0){
-                var denomination = $(value).find('span.denomination').text().toLowerCase();
-                var number = $(value).find('span.number').text().toLowerCase();
-                if(text.length == 0
-                    || denomination.indexOf(text.toLowerCase()) != -1
-                    || number.indexOf(text.toLowerCase()) != -1
-                    || (number + denomination).replace(/ /g,'').indexOf(text.toLowerCase().replace(/ /g,'')) != -1){
-
-                    $(value).removeClass('hide');
-                }else{
-                    $(value).addClass('hide');
-                }
-            }
-        });
+        var text = $(e.currentTarget).val().toLowerCase();
+        var category = this.$('.search-category').val();
+        var result;
+        if(category == ''){
+          result = this.collection.search(text);
+        }else{
+          result = this.collection.searchByField(text, category);
+        }
+        this.renderAll(result.toJSON());
     },
 
     showLayer:function(e){
@@ -80,10 +74,19 @@ App.View.LayerList = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.html(this._template({
-            layers : this.collection.toJSON()
-        }));
+      this.$el.html(this._template());
+      this.$list = this.$('tbody');
+      this.renderAll();
+      return this;
+    },
 
-        return this;
+    renderAll: function(data){
+      if(!data)
+        data = this.collection.toJSON();
+      this.$list.empty();
+      var that = this;
+      data.forEach(function(item){
+        that.$list.append(that._itemtemplate(item));
+      });
     }
 });

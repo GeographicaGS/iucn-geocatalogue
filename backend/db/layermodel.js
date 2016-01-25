@@ -6,9 +6,13 @@ function LayerModel() {
 }
 
 LayerModel.prototype.getLayerList = function(callback){
-	BaseModel.query(callback, 'SELECT l.id, l.id_code_num, l.name, l.department, l.theme, l.subtheme, l.family ' +
-								'FROM data.layer l '+
-								'order by l.name');
+	// BaseModel.query(callback, 'SELECT l.id, l.id_code_num, l.name, l.department, l.theme, l.subtheme, l.family ' +
+	// 							'FROM data.layer l '+
+	// 							'order by l.name');
+	BaseModel.query(callback, "SELECT l.id, l.id_code_num, l.name, l.department, l.theme, l.subtheme, l.family, string_agg(k.keyword, ',') as keywords " +
+								"FROM data.layer l, data.layer_keyword k " +
+								"where l.id = k.id_layer " +
+								"group by l.id order by l.name");
 };
 
 LayerModel.prototype.getLayer = function(id,callback){
