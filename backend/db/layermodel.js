@@ -9,7 +9,7 @@ LayerModel.prototype.getLayerList = function(callback){
 	// BaseModel.query(callback, 'SELECT l.id, l.id_code_num, l.name, l.department, l.theme, l.subtheme, l.family ' +
 	// 							'FROM data.layer l '+
 	// 							'order by l.name');
-	BaseModel.query(callback, "SELECT l.id, l.id_code_num, l.name, l.department, l.theme, l.subtheme, l.family, string_agg(k.keyword, ',') as keywords " +
+	BaseModel.query(callback, "SELECT l.id, l.summary, l.project_name, l.data_responsible, l.metadata_responsible, l.source, l.id_code_num, l.name, l.department, l.theme, l.subtheme, l.family, string_agg(k.keyword, ',') as keywords " +
 								"FROM data.layer l, data.layer_keyword k " +
 								"where l.id = k.id_layer " +
 								"group by l.id order by l.name");
@@ -41,10 +41,23 @@ LayerModel.prototype.insertLayer = function(layer,callback){
 				[insertId[0].id, keyword]
 			);
 		}
-		callback(err,{id: insertId[0].id});
+
+		var id = insertId[0].id.toString();
+		var code = '0000000'
+		if(id.length >= 7){
+			code = insertId;
+		}else{
+			code = code.slice(0, 7-id.length) + id;
+		}
+		
+		BaseModel.query(callback(err,{id: insertId[0].id, id_code_num: code}),
+			'UPDATE data.layer SET id_code_num=$1 WHERE id=$2',
+			[(layer.department.slice(0, 3)+ layer.theme.slice(0, 3) + layer.subtheme.slice(0, 3) + code).toUpperCase(),  insertId[0].id]
+		 );
+		// callback(err,{id: insertId[0].id});
 	},
-		'INSERT INTO data.layer(id_code_num, department, theme, subtheme, family, name, filetype, crs, extension, scale, review_date, edition_date, summary, project_name, source, publication, link, data_responsible, metadata_responsible, language, access_limitation, other_info) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22) RETURNING id',
-		[layer.id_code_num, layer.department, layer.theme, layer.subtheme, layer.family, layer.name, layer.filetype, layer.crs, layer.extension, layer.scale, layer.review_date, layer.edition_date, layer.summary, layer.project_name, layer.source, layer.publication, layer.link, layer.data_responsible, layer.metadata_responsible, layer.language, layer.access_limitation, layer.other_info]
+		'INSERT INTO data.layer(department, theme, subtheme, family, name, filetype, crs, extension, scale, review_date, edition_date, summary, project_name, source, publication, link, data_responsible, metadata_responsible, language, access_limitation, other_info) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21) RETURNING id',
+		[layer.department, layer.theme, layer.subtheme, layer.family, layer.name, layer.filetype, layer.crs, layer.extension, layer.scale, layer.review_date, layer.edition_date, layer.summary, layer.project_name, layer.source, layer.publication, layer.link, layer.data_responsible, layer.metadata_responsible, layer.language, layer.access_limitation, layer.other_info]
 	);
 };
 
@@ -71,15 +84,14 @@ LayerModel.prototype.updateLayer = function(layer,callback){
 LayerModel.prototype.deleteLayer = function(id_layer,callback){
 
 	BaseModel.query(function(err,insertId){
-		BaseModel.query(function(err,insertId){
+			BaseModel.query(function(err,insertId){
 
-				callback(err,null);
-			},
-			'DELETE FROM data.layer_keyword WHERE id_layer = $1', [id_layer]
-		);
-	},
-		'DELETE FROM data.layer WHERE id = $1',
-		[id_layer]
+					callback(err,null);
+
+				},'DELETE FROM data.layer WHERE id = $1', [id_layer]
+			);
+
+		}, 'DELETE FROM data.layer_keyword WHERE id_layer = $1', [id_layer]
 	);
 };
 module.exports = LayerModel;

@@ -32,11 +32,7 @@ UserModel.prototype.createUser = function(user, callback){
 
 UserModel.prototype.removeUser = function(id,callback){
 
-	BaseModel.query(function(){
-
-		BaseModel.query(callback, 'DELETE FROM data.user WHERE id=$1', [id]);
-
-	}, 'DELETE FROM data.incidence WHERE id_user=$1', [id]);
+	BaseModel.query(callback, 'DELETE FROM data.user WHERE id=$1', [id]);
 };
 
 

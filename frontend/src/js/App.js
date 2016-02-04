@@ -148,6 +148,7 @@ App.doLogin = function(user){
         url: App.config.API_URL + "/is_logged",
         dataType:"JSON",
         success: function(usercomplete) {
+            
             App.user = usercomplete;
             App.user["password"] = user["password"];
             localStorage.setItem("user",JSON.stringify(App.user));
@@ -160,19 +161,7 @@ App.doLogin = function(user){
                 $('.main-nav li[menu=1] a[href="new_apply"]').addClass('hide');
             }
 
-
-            if(window.location.pathname == '/login' || window.location.hash == '#login'){
-                if(!Backbone.History.started){
-                    Backbone.history.start({pushState: true, silent: true});
-                }
-                App.router.navigate('',{trigger: true});
-            }else{
-                if(!Backbone.History.started){
-                    Backbone.history.start({pushState: true});
-                }
-            }
-
-            App.loginComplete();
+            App.globalInit();
         },
         error: function (jqxhr, settings, exception) {
             localStorage.removeItem("user");
@@ -348,3 +337,45 @@ App.formatNumber = function (n,decimals){
         }
     }
 };
+
+App.globalInit = function(){
+
+    App.layerCollection = new App.Collection.Layers();
+    App.themes = [], App.subthemes, App.departments;
+    var themes = [], subthemes = [], departments = [];
+
+    App.layerCollection.fetch({success:function(data){
+        _.each(data.toJSON(),function (d){
+            themes.push(d.theme);
+            subthemes.push(d.subtheme)
+            departments.push(d.department);
+        });
+
+        App.themes = App.removeDuplicatesFromArray(themes).sort();
+        App.subthemes = App.removeDuplicatesFromArray(subthemes).sort();
+        App.departments = App.removeDuplicatesFromArray(departments).sort();
+
+        if(window.location.pathname == '/login' || window.location.hash == '#login'){
+            if(!Backbone.History.started){
+                Backbone.history.start({pushState: true, silent: true});
+            }
+            App.router.navigate('',{trigger: true});
+        }else{
+            if(!Backbone.History.started){
+                Backbone.history.start({pushState: true});
+            }
+        }
+
+        App.loginComplete();
+        
+    }});
+}
+
+App.removeDuplicatesFromArray = function(array){
+    var unique = [];
+    $.each(array, function(i, el){
+        if($.inArray(el, unique) === -1) unique.push(el);
+    });
+
+    return unique;
+}

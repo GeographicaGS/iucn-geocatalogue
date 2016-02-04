@@ -8,10 +8,10 @@
 
 		<div class="application-content">
 			<div class="application-form user-form">
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<span class="label edit">ID Code Num</span>
 					<input  id="layerIdcodenum" class="edit" type="text" name="id_code_num" maxlength="255">
-				</div>
+				</div> -->
 
 				<div class="form-group">
 					<span class="label edit">Name</span>
@@ -21,13 +21,38 @@
 				<div class="form-group">
 					<span class="label edit">Area</span>
 					<input  id="layerDepartment" class="edit" type="text" name="department" maxlength="100">
+					<select id="layerDepartmentSelect" class="layer">
+						<%  _.each(App.departments,function (departments){ 
+								if(departments != ""){
+						%>
+							<option value="<%=departments%>"><%=departments%></option>
+						<%  	}
+						}); %>
+					</select>
 				</div>
 
 				<div class="form-group">
 					<span class="label edit">Theme</span>
 					<input id="layerTheme" class="edit" type="text" name="theme" maxlength="100">
+					<select id="layerThemeSelect" class="layer">
+						<%  _.each(App.themes,function (themes){ 
+								if(themes != ""){
+							%>
+							<option value="<%=themes%>"><%=themes%></option>
+						<%  	}
+						}); %>
+					</select>
+
 					<span class="label edit inline">Subtheme</span>
 					<input  id="layerSubtheme" class="edit inline" type="text" name="subtheme" maxlength="100">
+					<select id="layerSubthemeSelect" class="layer">
+						<%  _.each(App.subthemes,function (subthemes){ 
+								if(subthemes != ""){
+						%>
+							<option value="<%=subthemes%>"><%=subthemes%></option>
+						<%  	}
+						}); %>
+					</select>
 				</div>
 
 				<div class="form-group separator">

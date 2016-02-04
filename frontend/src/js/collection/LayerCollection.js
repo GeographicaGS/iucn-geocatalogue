@@ -21,6 +21,7 @@ App.Collection.Layers = Backbone.Collection.extend({
 		var filtered = [];
 		this.each(function(item){
 			var result = item.get('name').toLowerCase().indexOf(term) > -1 ||
+			item.get('id_code_num').toLowerCase().indexOf(term) > -1 ||
 			item.get('theme').toLowerCase().indexOf(term) > -1 ||
 			item.get('subtheme').toLowerCase().indexOf(term) > -1 ||
 			item.get('family').toLowerCase().indexOf(term) > -1 ||
@@ -53,4 +54,34 @@ App.Collection.Layers = Backbone.Collection.extend({
 		});
 		return new App.Collection.Layers(filtered);
 	},
+
+	searchByArea: function(area){
+		var filtered = [];
+		this.each(function(item){
+			if(item.get('department').indexOf(area) > -1){
+				filtered.push(item);
+			}
+		});
+		return new App.Collection.Layers(filtered);
+	},
+
+	searchByTheme: function(area){
+		var filtered = [];
+		this.each(function(item){
+			if(item.get('theme').indexOf(area) > -1){
+				filtered.push(item);
+			}
+		});
+		return new App.Collection.Layers(filtered);
+	},
+
+	searchBySubTheme: function(area){
+		var filtered = [];
+		this.each(function(item){
+			if(item.get('subtheme').indexOf(area) > -1){
+				filtered.push(item);
+			}
+		});
+		return new App.Collection.Layers(filtered);
+	}
 });

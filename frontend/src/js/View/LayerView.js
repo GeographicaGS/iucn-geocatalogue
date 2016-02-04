@@ -26,10 +26,26 @@ App.View.Layer = Backbone.View.extend({
         'click #addKeyword' : 'addKeyword',
         'click .delkw': 'removeKeyword',
         'click .delete-btn' : 'delete',
-        'click .copytoclipboard': 'copyLinkToClipboard'
+        'click .copytoclipboard': 'copyLinkToClipboard',
+        'change #layerDepartmentSelect': 'clickDepartmentSelect',
+
+        'change #layerThemeSelect': 'clickThemeSelect',
+        'change #layerSubthemeSelect': 'clickSubthemeSelect',
 
         // "click .cancel-btn" : "cancelEdit",
        // "click .save-btn" : "save"
+    },
+
+    clickDepartmentSelect:function(e){
+        this.$('#layerDepartment').val($(e.target).val());
+    },
+
+    clickThemeSelect:function(e){
+        this.$('#layerTheme').val($(e.target).val());
+    },
+
+    clickSubthemeSelect:function(e){
+        this.$('#layerSubtheme').val($(e.target).val());
     },
 
     expandPanel: function(e){
@@ -71,7 +87,7 @@ App.View.Layer = Backbone.View.extend({
             })
 
             this.model.set({
-                id_code_num: this.$('input[name="id_code_num"]').val(),
+                // id_code_num: this.$('input[name="id_code_num"]').val(),
                 name: this.$('input[name="name"]').val(),
                 department: this.$('input[name="department"]').val(),
                 theme: this.$('input[name="theme"]').val(),
@@ -102,6 +118,9 @@ App.View.Layer = Backbone.View.extend({
             var _this = this;
             this.model.save('', '',
                 {success: function(model,response){
+                    _this.model.set('id', response.results.id);
+                    _this.model.set('id_code_num', response.results.id_code_num);
+                    App.layerCollection.add(_this.model);
                     App.router.navigate('/layers/' + response.results.id ,{trigger: true});
                 }
             });
@@ -191,10 +210,12 @@ App.View.Layer = Backbone.View.extend({
 
     delete: function(){
         var r = confirm('Are you sure?');
-        if (r)
+        if (r){
+            App.layerCollection.remove(this.model);
             this.model.destroy({ success: function(model, response) {
                 App.router.navigate('layers',{trigger:true});
             }});
+        }
     },
 
     copyLinkToClipboard: function(e){

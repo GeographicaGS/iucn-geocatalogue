@@ -88,7 +88,7 @@ App.View.User = Backbone.View.extend({
         if(c){
             _this.model.destroy({
                 success:function(){
-                    App.router.navigate('program/' + App.programView.current + '/admin' ,{trigger: true});
+                    App.router.navigate('admin' ,{trigger: true});
                 }
             });
         }

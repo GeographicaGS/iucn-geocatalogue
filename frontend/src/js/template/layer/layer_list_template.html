@@ -2,6 +2,7 @@
 	<div class="table-container">
 		<div class="wrapper">
 			<div class="inner">
+				<span class="counter">Total <strong></strong></span>
 				<table class="application-table">
 					<thead class="table-header">
 						<tr>
@@ -11,7 +12,34 @@
 								<div class="search-form-group">
 									<span class="ico-search"></span>
 									<input class="search-input" type="text" name="search" placeholder="Buscar">
-									<select class="search-category">
+
+									<select class="search-area hide">
+										<option value="" selected>All areas</option>
+										<%  _.each(App.departments,function (d){ 
+												if(d!='')
+											%>
+											<option value="<%=d%>"><%=d%></option>
+										<%  }); %>
+									</select>
+
+									<select class="search-theme hide">
+										<option value="" selected>All themes</option>
+										<%  _.each(App.themes,function (t){ 
+												if(t!='') %>
+											<option value="<%=t%>"><%=t%></option>
+										<%  }); %>
+									</select>
+
+									<select class="search-subtheme hide">
+										<option value="" selected>All subthemes</option>
+										<%  _.each(App.subthemes,function (s){ 
+												if(s!='')
+											%>
+											<option value="<%=s%>"><%=s%></option>
+										<%  }); %>
+									</select>
+
+									<select class="search-category ml">
 										<option value="" selected>All</option>
 										<option value="name">Name</option>
 										<option value="department">Area</option>
@@ -19,12 +47,20 @@
 										<option value="subtheme">Subtheme</option>
 										<option value="family">Family</option>
 										<option value="keywords">Keywords</option>
+										<option value="summary">Summary</option>
+										<option value="project_name">Project Name</option>
+										<option value="data_responsible">Data responsible</option>
+										<option value="metadata_responsible">Metadata responsible</option>
+										<option value="source">File source</option>
 									</select>
+									
+
 									<span class="close-search-btn"></span>
 								</div>
 							</th>
 							<th><span>Area</span></th>
 							<th><span>Theme</span></th>
+							<th><span>Family</span></th>
 						</tr>
 					</thead>
 

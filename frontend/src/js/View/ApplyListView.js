@@ -80,8 +80,15 @@ App.View.ApplyList = Backbone.View.extend({
     },
     
     render: function() {
+
+        var json = this.collection.toJSON();
+
+        // _.each(json,function (j){
+        //     var a = 0;
+        // });
+
         this.$el.html(this._template({
-            applies : this.collection.toJSON()
+            applies : json
         }));
 
         return this;
