@@ -13,7 +13,11 @@ App.View.LayerBasicInformation = Backbone.View.extend({
     events: {
         'click .getfrommap-btn' : 'getMapLocation',
         'click .cancel-btn' : 'cancelEdit',
-        'click .save-btn' : 'save'
+        'click .save-btn' : 'save',
+
+        'change #layerDepartmentSelectEdit': 'changeDepartmentSelect',
+        'change #layerThemeSelectEdit': 'changeThemeSelect',
+        'change #layerSubthemeSelectEdit': 'chengeSubthemeSelect',
     },
 
     getMapLocation: function(e){
@@ -30,6 +34,18 @@ App.View.LayerBasicInformation = Backbone.View.extend({
         }else{
             this._cancelMapLocation();
         }
+    },
+
+    changeDepartmentSelect:function(e){
+        this.$('#layerDepartment').val($(e.target).val());
+    },
+
+    changeThemeSelect:function(e){
+        this.$('#layerTheme').val($(e.target).val());
+    },
+
+    chengeSubthemeSelect:function(e){
+        this.$('#layerSubtheme').val($(e.target).val());
     },
 
     save:function(e){

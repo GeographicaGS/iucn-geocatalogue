@@ -20,15 +20,42 @@
 		<div class="form-group edit">
 			<span class="label">Area</span>
 			<input id="layerDepartment" class="edit" type="text" name="department" maxlength="100" value="<%=layer.department%>">
+			<select id="layerDepartmentSelectEdit" class="layer">
+				<option value="">Select area</option>
+				<%  _.each(App.departments,function (departments){ 
+						if(departments != ""){
+				%>
+					<option value="<%=departments%>"><%=departments%></option>
+				<%  	}
+				}); %>
+			</select>
 		</div>
 
 		<div class="form-group edit">
 			<span class="label">Theme</span>
 			<input id="layerTheme" class="edit" type="text" name="theme" maxlength="100" value="<%=layer.theme%>">
+			<select id="layerThemeSelectEdit" class="layer">
+				<option value="">Select theme</option>
+				<%  _.each(App.themes,function (themes){ 
+						if(themes != ""){
+					%>
+					<option value="<%=themes%>"><%=themes%></option>
+				<%  	}
+				}); %>
+			</select>
 		</div>
 		<div class="form-group edit">
 			<span class="label">Subtheme</span>
 			<input id="layerSubtheme" class="edit" type="text" name="subtheme" maxlength="100" value="<%=layer.subtheme%>">
+			<select id="layerSubthemeSelectEdit" class="layer">
+				<option value="">Select subtheme</option>
+				<%  _.each(App.subthemes,function (subthemes){ 
+						if(subthemes != ""){
+				%>
+					<option value="<%=subthemes%>"><%=subthemes%></option>
+				<%  	}
+				}); %>
+			</select>
 		</div>
 
 		<div class="form-group">
@@ -99,11 +126,10 @@
 			<span class="label">Extension</span>
 			<select name="extension" id="layerExtension" class="edit">
 					<option value="med" <% if (layer.extension == 'med'){ %>selected<% } %>>Mediterranean sea</option>
-					<option value="morocco" <% if (layer.extension == 'morocco'){ %>selected<% } %>>Morocco</option>
 					<option value="world" <% if (layer.extension == 'world'){ %>selected<% } %>>World</option>
 					<option value="country" <% if (layer.extension == 'country'){ %>selected<% } %>>Country</option>
 			</select>
-			<span>
+			<span style="white-space: normal;">
 				<% if (layer.extension == 'med'){ %>
 					Mediterranean sea
 				<% }else if(layer.extension == 'morocco'){ %>

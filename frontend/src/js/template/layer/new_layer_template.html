@@ -15,13 +15,14 @@
 
 				<div class="form-group">
 					<span class="label edit">Name</span>
-					<input id="layerName" class="edit" type="text" name="name" maxlength="255">
+					<input placeholder="Layer's name" id="layerName" class="edit" type="text" name="name" maxlength="255">
 				</div>
 
 				<div class="form-group">
 					<span class="label edit">Area</span>
-					<input  id="layerDepartment" class="edit" type="text" name="department" maxlength="100">
+					<input placeholder="Select an Area for this dataset (or create it)"  id="layerDepartment" class="edit" type="text" name="department" maxlength="100">
 					<select id="layerDepartmentSelect" class="layer">
+						<option value="">Select area</option>
 						<%  _.each(App.departments,function (departments){ 
 								if(departments != ""){
 						%>
@@ -33,8 +34,9 @@
 
 				<div class="form-group">
 					<span class="label edit">Theme</span>
-					<input id="layerTheme" class="edit" type="text" name="theme" maxlength="100">
+					<input placeholder="Select a Theme for this dataset (or create it)" id="layerTheme" class="edit" type="text" name="theme" maxlength="100">
 					<select id="layerThemeSelect" class="layer">
+						<option value="">Select theme</option>
 						<%  _.each(App.themes,function (themes){ 
 								if(themes != ""){
 							%>
@@ -44,8 +46,9 @@
 					</select>
 
 					<span class="label edit inline">Subtheme</span>
-					<input  id="layerSubtheme" class="edit inline" type="text" name="subtheme" maxlength="100">
+					<input placeholder="Select a Subtheme for this dataset (or create it)"  id="layerSubtheme" class="edit inline" type="text" name="subtheme" maxlength="100">
 					<select id="layerSubthemeSelect" class="layer">
+						<option value="">Select subtheme</option>
 						<%  _.each(App.subthemes,function (subthemes){ 
 								if(subthemes != ""){
 						%>
@@ -57,7 +60,7 @@
 
 				<div class="form-group separator">
 					<span class="label">Summary</span>
-					<textarea id="layerSummary" name="summary" class="edit"></textarea>
+					<textarea placeholder="Write a name for the project" id="layerSummary" name="summary" class="edit"></textarea>
 				</div><!-- form-group -->
 
 				<div class="form-group">
@@ -65,7 +68,7 @@
 					<div id="layerKeywords">
 						<ul>
 							<li>
-								<input type="text" class="keyword" name="keyword" class="edit" maxlength="100">
+								<input placeholder="Write a keyword" type="text" class="keyword" name="keyword" class="edit" maxlength="100">
 								<a href="#" class="delkw">Delete</a>
 							</li>
 						</ul>
@@ -75,26 +78,25 @@
 
 				<div class="form-group">
 					<span class="label edit">Family</span>
-					<input id="layerFamily" class="edit" type="text" name="family" maxlength="100">
+					<input placeholder="Family's layer" id="layerFamily" class="edit" type="text" name="family" maxlength="100">
 				</div>
 
 				<div class="form-group separator">
 					<span class="label">Project name</span>
-					<input id="layerProjectname" class="edit" type="text" name="project_name" maxlength="255">
+					<input placeholder="Project's layer" id="layerProjectname" class="edit" type="text" name="project_name" maxlength="255">
 				</div><!-- form-group -->
 
 				<div class="form-group">
 					<span class="label">Publication</span>
-					<input id="layerPublication" class="edit" type="text" name="publication">
+					<input placeholder="Where he is posted layer" id="layerPublication" class="edit" type="text" name="publication">
 				</div><!-- form-group -->
 
 				<div class="form-group separator">
 					<span class="label">CRS (EPSG)</span>
-					<input  id="layerCrs" class="edit" type="text" name="crs" maxlength="50">
+					<input placeholder="Coordinate reference system with EPSG code"  id="layerCrs" class="edit" type="text" name="crs" maxlength="50">
 					<span class="label inline">Extension</span>
 					<select name="extension" id="layerExtension">
 							<option value="med">Mediterranean sea</option>
-							<option value="morocco">Morocco</option>
 							<option value="world">World</option>
 							<option value="country">Country</option>
 					</select>
@@ -102,7 +104,7 @@
 
 				<div class="form-group">
 					<span class="label">Scale</span>
-					<input id="layerScale" class="edit" type="text" name="scale" maxlength="20">
+					<input placeholder="Map scale" id="layerScale" class="edit" type="text" name="scale" maxlength="20">
 				</div>
 
 				<!-- <div class="form-group">
@@ -112,17 +114,17 @@
 
 				<div class="form-group separator">
 					<span class="label">Filepath link</span>
-					<input id="layerFilelink" class="edit" type="text" name="link">
+					<input placeholder="Layer's absolute path" id="layerFilelink" class="edit" type="text" name="link">
 				</div><!-- form-group -->
 
 				<div class="form-group">
 					<span class="label">File format</span>
-					<input id="layerFiletype" type="text" name="filetype" class="edit" maxlength="50">
+					<input placeholder="Layer's file format" id="layerFiletype" type="text" name="filetype" class="edit" maxlength="50">
 				</div><!-- form-group -->
 
 				<div class="form-group">
 					<span class="label">File source</span>
-					<input id="layerFile source" class="edit" type="text" name="source">
+					<input placeholder="Layer's file source" id="layerFile source" class="edit" type="text" name="source">
 				</div><!-- form-group -->
 
 				<div class="form-group separator hide">
@@ -134,27 +136,27 @@
 
 				<div class="form-group separator">
 					<span class="label">Data responsible</span>
-					<input id="layerDataresponsible" class="edit" type="text" name="data_responsible" maxlength="255">
+					<input placeholder="Person responsible of dataset" id="layerDataresponsible" class="edit" type="text" name="data_responsible" maxlength="255">
 				</div><!-- form-group -->
 
 				<div class="form-group">
 					<span class="label">Metadata responsible</span>
-					<input id="layerMetadataresponsible" class="edit" type="text" name="metadata_responsible" maxlength="255">
+					<input placeholder="Person responsible of metadata" id="layerMetadataresponsible" class="edit" type="text" name="metadata_responsible" maxlength="255">
 				</div><!-- form-group -->
 
 				<div class="form-group">
 					<span class="label">Language</span>
-					<input id="layerLanguage" class="edit" type="text" maxlength="50" name="language">
+					<input placeholder="Layer's language" id="layerLanguage" class="edit" type="text" maxlength="50" name="language">
 				</div><!-- form-group -->
 
 				<div class="form-group">
 					<span class="label">Access limitation</span>
-					<textarea id="layerAccesslimitation" name="access_limitation" class="edit"></textarea>
+					<textarea placeholder="Dataset access and share policy" id="layerAccesslimitation" name="access_limitation" class="edit"></textarea>
 				</div><!-- form-group -->
 
 				<div class="form-group separator">
 					<span class="label">Other information</span>
-					<textarea id="layerOtherinformation" name="other_info" class="edit"></textarea>
+					<textarea placeholder="Other information or issues about the dataset" id="layerOtherinformation" name="other_info" class="edit"></textarea>
 				</div><!-- form-group -->
 			</div>
 		</div>
