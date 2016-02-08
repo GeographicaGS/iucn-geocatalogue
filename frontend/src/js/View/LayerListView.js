@@ -20,7 +20,7 @@ App.View.LayerList = Backbone.View.extend({
         this.collection = App.layerCollection;
         // this.listenTo(this.collection,"reset",this.render);
         
-        this.render();
+        this.collection ? this.render() : null;
     },
 
     events: {
