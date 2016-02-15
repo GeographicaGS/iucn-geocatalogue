@@ -60,7 +60,7 @@
 
 				<div class="form-group separator">
 					<span class="label">Summary</span>
-					<textarea placeholder="Write a name for the project" id="layerSummary" name="summary" class="edit"></textarea>
+					<textarea placeholder="Layer abstract and/or short description of the project" id="layerSummary" name="summary" class="edit"></textarea>
 				</div><!-- form-group -->
 
 				<div class="form-group">
@@ -78,7 +78,16 @@
 
 				<div class="form-group">
 					<span class="label edit">Family</span>
-					<input placeholder="Family's layer" id="layerFamily" class="edit" type="text" name="family" maxlength="100">
+					<input id="layerFamily" placeholder="Taxonomic family name" id="layerFamily" class="edit" type="text" name="family" maxlength="100">
+					<select id="layerFamilySelect" class="layer">
+						<option value="">Select family</option>
+						<%  _.each(App.families,function (family){ 
+								if(family != ""){
+						%>
+							<option value="<%=family%>"><%=family%></option>
+						<%  	}
+						}); %>
+					</select>
 				</div>
 
 				<div class="form-group separator">
@@ -88,7 +97,7 @@
 
 				<div class="form-group">
 					<span class="label">Publication</span>
-					<input placeholder="Where he is posted layer" id="layerPublication" class="edit" type="text" name="publication">
+					<input placeholder="Report document web link (URL)" id="layerPublication" class="edit" type="text" name="publication">
 				</div><!-- form-group -->
 
 				<div class="form-group separator">
@@ -99,6 +108,7 @@
 							<option value="med">Mediterranean sea</option>
 							<option value="world">World</option>
 							<option value="country">Country</option>
+							<option value="local">Local</option>
 					</select>
 				</div><!-- form-group -->
 
@@ -114,7 +124,7 @@
 
 				<div class="form-group separator">
 					<span class="label">Filepath link</span>
-					<input placeholder="Layer's absolute path" id="layerFilelink" class="edit" type="text" name="link">
+					<input placeholder="Layer server file path" id="layerFilelink" class="edit" type="text" name="link">
 				</div><!-- form-group -->
 
 				<div class="form-group">

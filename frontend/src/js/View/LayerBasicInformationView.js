@@ -18,6 +18,7 @@ App.View.LayerBasicInformation = Backbone.View.extend({
         'change #layerDepartmentSelectEdit': 'changeDepartmentSelect',
         'change #layerThemeSelectEdit': 'changeThemeSelect',
         'change #layerSubthemeSelectEdit': 'chengeSubthemeSelect',
+        'change #layerFamilySelectEdit': 'chengeFamilySelect',
     },
 
     getMapLocation: function(e){
@@ -46,6 +47,10 @@ App.View.LayerBasicInformation = Backbone.View.extend({
 
     chengeSubthemeSelect:function(e){
         this.$('#layerSubtheme').val($(e.target).val());
+    },
+
+    chengeFamilySelect:function(e){
+        this.$('#layerFamily').val($(e.target).val());
     },
 
     save:function(e){

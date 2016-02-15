@@ -31,6 +31,7 @@ App.View.Layer = Backbone.View.extend({
 
         'change #layerThemeSelect': 'clickThemeSelect',
         'change #layerSubthemeSelect': 'clickSubthemeSelect',
+        'change #layerFamilySelect': 'clickFamilySelect',
 
         // "click .cancel-btn" : "cancelEdit",
        // "click .save-btn" : "save"
@@ -46,6 +47,10 @@ App.View.Layer = Backbone.View.extend({
 
     clickSubthemeSelect:function(e){
         this.$('#layerSubtheme').val($(e.target).val());
+    },
+
+    clickFamilySelect:function(e){
+        this.$('#layerFamily').val($(e.target).val());
     },
 
     expandPanel: function(e){

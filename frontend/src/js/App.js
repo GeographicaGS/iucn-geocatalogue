@@ -341,19 +341,21 @@ App.formatNumber = function (n,decimals){
 App.globalInit = function(){
 
     App.layerCollection = new App.Collection.Layers();
-    App.themes = [], App.subthemes, App.departments;
-    var themes = [], subthemes = [], departments = [];
+    App.themes = [], App.subthemes, App.departments, App.families;
+    var themes = [], subthemes = [], departments = [], families = [];
 
     App.layerCollection.fetch({success:function(data){
         _.each(data.toJSON(),function (d){
             themes.push(d.theme);
             subthemes.push(d.subtheme)
             departments.push(d.department);
+            families.push(d.family);
         });
 
         App.themes = App.removeDuplicatesFromArray(themes).sort();
         App.subthemes = App.removeDuplicatesFromArray(subthemes).sort();
         App.departments = App.removeDuplicatesFromArray(departments).sort();
+        App.families = App.removeDuplicatesFromArray(families).sort();
 
         if(window.location.pathname == '/login' || window.location.hash == '#login'){
             if(!Backbone.History.started){

@@ -39,6 +39,15 @@
 										<%  }); %>
 									</select>
 
+									<select class="search-family hide">
+										<option value="" selected>All families</option>
+										<%  _.each(App.families,function (s){ 
+												if(s!='')
+											%>
+											<option value="<%=s%>"><%=s%></option>
+										<%  }); %>
+									</select>
+
 									<select class="search-category ml">
 										<option value="" selected>All</option>
 										<option value="name">Name</option>

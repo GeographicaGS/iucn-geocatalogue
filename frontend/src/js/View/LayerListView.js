@@ -32,6 +32,7 @@ App.View.LayerList = Backbone.View.extend({
         "change .search-area" : "searchArea",
         "change .search-theme" : "searchTheme",
         "change .search-subtheme" : "searchSubTheme",
+        "change .search-family" : "searchFamily",
     },
 
     openSearch: function(e){
@@ -75,7 +76,7 @@ App.View.LayerList = Backbone.View.extend({
 
     searchCategory:function(e){
         var selected = $(e.target).val();
-        this.$('.search-area,.search-theme,.search-subtheme').addClass('hide');
+        this.$('.search-area,.search-theme,.search-subtheme,.search-family').addClass('hide');
         this.$('.search-input').css({'visibility':'hidden'});
         if(selected ==  'department'){
             this.$('.search-area').val('').trigger('change');
@@ -86,6 +87,9 @@ App.View.LayerList = Backbone.View.extend({
         }else if(selected ==  'subtheme'){
             this.$('.search-subtheme').val('').trigger('change');
             this.$('.search-subtheme').removeClass('hide');
+        }else if(selected ==  'family'){
+            this.$('.search-family').val('').trigger('change');
+            this.$('.search-family').removeClass('hide');
         }else{
             this.$('.search-input').css({'visibility':'visible'});
         }
@@ -116,6 +120,15 @@ App.View.LayerList = Backbone.View.extend({
        selected == '' ? 
            this.renderAll(this.collection.search('').toJSON()):
            this.renderAll(this.collection.searchBySubTheme(selected).toJSON());
+    },
+
+    searchFamily:function(e){
+       var selected = $(e.target).val(); 
+
+       this.$('.search-input').val('');
+       selected == '' ? 
+           this.renderAll(this.collection.search('').toJSON()):
+           this.renderAll(this.collection.searchByFamily(selected).toJSON());
     },
 
     onClose: function(){

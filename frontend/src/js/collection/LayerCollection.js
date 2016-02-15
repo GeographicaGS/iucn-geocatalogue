@@ -83,5 +83,15 @@ App.Collection.Layers = Backbone.Collection.extend({
 			}
 		});
 		return new App.Collection.Layers(filtered);
+	},
+
+	searchByFamily: function(area){
+		var filtered = [];
+		this.each(function(item){
+			if(item.get('family').indexOf(area) > -1){
+				filtered.push(item);
+			}
+		});
+		return new App.Collection.Layers(filtered);
 	}
 });
