@@ -83,6 +83,10 @@ App.View.LayerBasicInformation = Backbone.View.extend({
           language: this.$('input[name="language"]').val(),
           access_limitation: this.$('textarea[name="access_limitation"]').val(),
           other_info: this.$('textarea[name="other_info"]').val(),
+
+          layer_creation: this.$('input[name="layer_creation"]').val(),
+          layer_update: this.$('input[name="layer_update"]').val(),
+          
           keywords: keywords
         });
 

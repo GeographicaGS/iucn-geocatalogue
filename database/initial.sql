@@ -47,8 +47,12 @@ CREATE TABLE data.layer
   crs character varying(50) NOT NULL,
   extension character varying(100) NOT NULL,
   scale character varying(20),
+  
   review_date date NOT NULL,
   edition_date date NOT NULL,
+  layer_creation date,
+  layer_update date,
+
   summary text NOT NULL,
   project_name character varying(255) NOT NULL,
   source text NOT NULL,

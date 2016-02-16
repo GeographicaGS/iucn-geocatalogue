@@ -117,12 +117,25 @@
 		<!-- separator -->
 
 		<div class="form-group separator">
-			<span class="label">Data creation</span>
+			<span class="label">Layer creation</span>
+			<input id="layerCreation" class="edit datepicker" type="text" name="layer_creation">
+			<span><%=layer.layer_creation%></span>
+		</div>
+
+		<div class="form-group">
+			<span class="label">Layer update</span>
+			<input id="layerUpdate" class="edit datepicker" type="text" name="layer_update">
+			<span><%=layer.layer_update%></span>
+		</div>
+
+		<div class="form-group">
+			<span class="label">Metadata creation</span>
 			<input id="layerEditiondate" class="edit hasDatePicker hide" type="text" name="edition_date" maxlength="50" value="<%=layer.edition_date%>">
 			<span><%=layer.edition_date%></span>
-		</div><!-- form-group -->
+		</div>
+
 		<div class="form-group">
-			<span class="label">Last review</span>
+			<span class="label">Metadata review</span>
 			<input id="layerReviewdate" class="edit hasDatePicker hide" type="text" name="review_date" maxlength="50" value="<%=layer.review_date%>">
 			<span><%=layer.review_date%></span>
 		</div>

@@ -81,6 +81,8 @@ App.View.Layer = Backbone.View.extend({
         error += App.checkInputByName(this,"metadata_responsible");
         error += App.checkInputByName(this,"language");
         error += App.checkInputByName(this,"access_limitation");
+        error += App.checkInputByName(this,"layer_creation");
+        error += App.checkInputByName(this,"layer_update");
 
         if(!error){
             var id_program = this.model.get('id_program');
@@ -115,6 +117,10 @@ App.View.Layer = Backbone.View.extend({
                 language: this.$('input[name="language"]').val(),
                 access_limitation: this.$('textarea[name="access_limitation"]').val(),
                 other_info: this.$('textarea[name="other_info"]').val(),
+
+                layer_creation: this.$('input[name="layer_creation"]').val(),
+                layer_update: this.$('input[name="layer_update"]').val(),
+
                 keywords: keywords
             });
 
@@ -178,6 +184,13 @@ App.View.Layer = Backbone.View.extend({
 
         this.$('#basic_information').append(this.basicInformationView.el);
 
+        var pattern = /(\d{2})\/(\d{2})\/(\d{4})/;
+        var layer_creation = this.model.get('layer_creation').replace(pattern,'$3-$2-$1');
+        var layer_update = this.model.get('layer_update').replace(pattern,'$3-$2-$1');
+
+        this.$('#layerCreation').datepicker({ dateFormat:'dd/mm/yy'}).datepicker("setDate", new Date(layer_creation));;
+        this.$('#layerUpdate').datepicker({ dateFormat:'dd/mm/yy' }).datepicker("setDate", new Date(layer_update));;
+
         return this;
     },
 
@@ -189,6 +202,8 @@ App.View.Layer = Backbone.View.extend({
         var todayStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
         this.$('input#layerEditiondate').val(today.toJSON());
         this.$('input#layerReviewdate').val(today.toJSON());
+
+        this.$('.datepicker').datepicker({ dateFormat:'dd/mm/yy' });
     },
 
     closePanel:function(elem){

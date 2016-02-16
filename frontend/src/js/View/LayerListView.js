@@ -43,6 +43,8 @@ App.View.LayerList = Backbone.View.extend({
     closeSearch: function(){
         this.$('.search-form-group').removeClass('open');
         this.$('.application-search-btn').removeClass('hide');
+        this.$('.search-category').val('');
+        this.$('.search-category').trigger('change');
         this.renderAll();
     },
 
