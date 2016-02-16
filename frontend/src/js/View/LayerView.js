@@ -185,11 +185,11 @@ App.View.Layer = Backbone.View.extend({
         this.$('#basic_information').append(this.basicInformationView.el);
 
         var pattern = /(\d{2})\/(\d{2})\/(\d{4})/;
-        var layer_creation = this.model.get('layer_creation').replace(pattern,'$3-$2-$1');
-        var layer_update = this.model.get('layer_update').replace(pattern,'$3-$2-$1');
+        var layer_creation = this.model.get('layer_creation') ? this.model.get('layer_creation').replace(pattern,'$3-$2-$1') : '';
+        var layer_update = this.model.get('layer_update') ? this.model.get('layer_update').replace(pattern,'$3-$2-$1') : '';
 
-        this.$('#layerCreation').datepicker({ dateFormat:'dd/mm/yy'}).datepicker("setDate", new Date(layer_creation));;
-        this.$('#layerUpdate').datepicker({ dateFormat:'dd/mm/yy' }).datepicker("setDate", new Date(layer_update));;
+        this.$('#layerCreation').datepicker({ dateFormat:'dd/mm/yy'}).datepicker("setDate", (layer_creation ? new Date(layer_creation):'' ));;
+        this.$('#layerUpdate').datepicker({ dateFormat:'dd/mm/yy' }).datepicker("setDate", (layer_update ? new Date(layer_update) : '' ));
 
         return this;
     },
