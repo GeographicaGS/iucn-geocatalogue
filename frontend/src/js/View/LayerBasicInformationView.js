@@ -59,6 +59,9 @@ App.View.LayerBasicInformation = Backbone.View.extend({
           keywords.push($(this).val());
         });
 
+        var layer_creation = this.$('input[name="layer_creation"]').val();
+        var layer_update = this.$('input[name="layer_update"]').val();
+
         this.model.set({
           id_code_num: this.$('input[name="id_code_num"]').val(),
           name: this.$('input[name="name"]').val(),
@@ -72,8 +75,9 @@ App.View.LayerBasicInformation = Backbone.View.extend({
           extension: this.$('select[name="extension"]').val(),
           //bounding_box: this.$('input[name="bounding_box"]').val(),
           scale: this.$('input[name="scale"]').val(),
-          review_date: this.$('input[name="review_date"]').val(),
-          edition_date: this.$('input[name="edition_date"]').val(),
+          // review_date: this.$('input[name="review_date"]').val(),
+          review_date: new Date(),
+          // edition_date: this.$('input[name="edition_date"]').val(),
           project_name: this.$('input[name="project_name"]').val(),
           source: this.$('input[name="source"]').val(),
           publication: this.$('input[name="publication"]').val(),
@@ -84,8 +88,8 @@ App.View.LayerBasicInformation = Backbone.View.extend({
           access_limitation: this.$('textarea[name="access_limitation"]').val(),
           other_info: this.$('textarea[name="other_info"]').val(),
 
-          layer_creation: this.$('input[name="layer_creation"]').val(),
-          layer_update: this.$('input[name="layer_update"]').val(),
+          layer_creation: layer_creation == "" ? null : layer_creation,
+          layer_update: layer_update == "" ? null : layer_update,
           
           keywords: keywords
         });
@@ -120,10 +124,10 @@ App.View.LayerBasicInformation = Backbone.View.extend({
             layer : layer
         }));
         var edition_date = new Date(layer.edition_date);
-        this.$('#layerEditiondate').val(edition_date.toJSON());
+        this.$('#layerEditiondate').val(edition_date.toLocaleDateString());
         this.$('#layerEditiondate + span').html(edition_date.toLocaleDateString());
         var review_date = new Date(layer.review_date);
-        this.$('#layerReviewdate').val(review_date.toJSON());
+        this.$('#layerReviewdate').val(review_date.toLocaleDateString());
         this.$('#layerReviewdate + span').html(review_date.toLocaleDateString());
         return this;
     },

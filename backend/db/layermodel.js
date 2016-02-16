@@ -76,8 +76,8 @@ LayerModel.prototype.updateLayer = function(layer,callback){
 			'DELETE FROM data.layer_keyword WHERE id_layer = $1', [layer.id]
 		);
 	},
-		'UPDATE data.layer SET id_code_num=$1, department=$2, theme=$3, subtheme=$4, family=$5, name=$6, filetype=$7, crs=$8, extension=$9, scale=$10, review_date=$11, edition_date=$12, summary=$13, project_name=$14, source=$15, publication=$16, link=$17, data_responsible=$18, metadata_responsible=$19, language=$20, access_limitation=$21, other_info=$22, layer_creation=to_date($23,\'DD/MM/YYYY\'), layer_update=to_date($24,\'DD/MM/YYYY\') WHERE id=$25 RETURNING id',
-		[layer.id_code_num, layer.department, layer.theme, layer.subtheme, layer.family, layer.name, layer.filetype, layer.crs, layer.extension, layer.scale, layer.review_date, layer.edition_date, layer.summary, layer.project_name, layer.source, layer.publication, layer.link, layer.data_responsible, layer.metadata_responsible, layer.language, layer.access_limitation, layer.other_info, layer.layer_creation, layer.layer_update, layer.id]
+		'UPDATE data.layer SET id_code_num=$1, department=$2, theme=$3, subtheme=$4, family=$5, name=$6, filetype=$7, crs=$8, extension=$9, scale=$10, review_date=now(), summary=$11, project_name=$12, source=$13, publication=$14, link=$15, data_responsible=$16, metadata_responsible=$17, language=$18, access_limitation=$19, other_info=$20, layer_creation=to_date($21,\'DD/MM/YYYY\'), layer_update=to_date($22,\'DD/MM/YYYY\') WHERE id=$23 RETURNING id',
+		[layer.id_code_num, layer.department, layer.theme, layer.subtheme, layer.family, layer.name, layer.filetype, layer.crs, layer.extension, layer.scale, layer.summary, layer.project_name, layer.source, layer.publication, layer.link, layer.data_responsible, layer.metadata_responsible, layer.language, layer.access_limitation, layer.other_info, layer.layer_creation, layer.layer_update, layer.id]
 	);
 };
 
