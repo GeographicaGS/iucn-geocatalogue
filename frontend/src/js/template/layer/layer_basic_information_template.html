@@ -79,7 +79,7 @@
 			</div>
 		</div>
 		<div class="form-group <% if(!layer.family){ %>edit<% } %>">
-			<span class="label <% if(!layer.family){ %>edit<% } %>">Family</span>
+			<span class="label <% if(!layer.family){ %>edit<% } %>">Taxonomic group</span>
 			
 			<input id="layerFamily" class="edit" type="text" name="family" maxlength="100" value="<%=layer.family%>">
 			
@@ -150,18 +150,18 @@
 		<div class="form-group">
 			<span class="label">Extension</span>
 			<select name="extension" id="layerExtension" class="edit">
-					<option value="med" <% if (layer.extension == 'med'){ %>selected<% } %>>Mediterranean sea</option>
-					<option value="world" <% if (layer.extension == 'world'){ %>selected<% } %>>World</option>
+					<option value="med" <% if (layer.extension == 'med'){ %>selected<% } %>>Mediterranean region</option>
+					<option value="world" <% if (layer.extension == 'world'){ %>selected<% } %>>Global</option>
 					<option value="country" <% if (layer.extension == 'country'){ %>selected<% } %>>Country</option>
 					<option value="local" <% if (layer.extension == 'local'){ %>selected<% } %>>Local</option>
 			</select>
 			<span style="white-space: normal;">
 				<% if (layer.extension == 'med'){ %>
-					Mediterranean sea
+					Mediterranean region
 				<% }else if(layer.extension == 'morocco'){ %>
 					Morocco
 				<% }else if(layer.extension == 'world'){ %>
-					World
+					Global
 				<% }else if(layer.extension == 'country'){ %>
 					Country
 				<% }else if(layer.extension == 'local'){ %>
